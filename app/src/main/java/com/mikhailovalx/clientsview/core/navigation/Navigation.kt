@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.mikhailovalx.clientsview.CalendarScreen
+import com.mikhailovalx.clientsview.ui.calendar.CalendarScreen
 import com.mikhailovalx.clientsview.ClientsScreen
 import com.mikhailovalx.clientsview.FinanceScreen
 import com.mikhailovalx.clientsview.SettingsScreen

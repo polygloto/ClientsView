@@ -16,11 +16,16 @@ import com.mikhailovalx.clientsview.core.navigation.BottomNavigationBar
 import com.mikhailovalx.clientsview.core.navigation.Navigation
 import com.mikhailovalx.clientsview.core.theme.TurquoiseColor
 import com.mikhailovalx.clientsview.core.theme.WhiteColor
+import com.mikhailovalx.clientsview.domain.calendar.EventCalendar
 import com.mikhailovalx.clientsview.ui.action_bar.TopBar
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val calendar = EventCalendar()
+
+
         setContent {
             MainScreen()
         }
