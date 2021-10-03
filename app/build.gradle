@@ -34,7 +34,6 @@ android {
         }
     }
     compileOptions {
-        coreLibraryDesugaringEnabled = true
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -82,10 +81,7 @@ dependencies {
     kapt("androidx.room:room-compiler:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
 
-    // Desugaring
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
-
-
-
-
+    // Calendar
+    implementation("com.github.sigmadeltasoftware:CalPose:1.1.0")
+    implementation "com.github.fornewid:material-motion-compose:0.5.1"
 }

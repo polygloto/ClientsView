@@ -3,11 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/compose-model-1633281830131.xml" value="0.24259259259259258" />
+        <entry key="../../../../layout/compose-model-1633281902242.xml" value="0.24259259259259258" />
+        <entry key="../../../../layout/compose-model-1633281960904.xml" value="0.24259259259259258" />
+        <entry key="../../../../layout/compose-model-1633285157348.xml" value="0.24259259259259258" />
+        <entry key="../../../../layout/compose-model-1633285358918.xml" value="1.0" />
+        <entry key="../../../../layout/compose-model-1633285548811.xml" value="0.17314814814814813" />
+        <entry key="../../../../layout/compose-model-1633286105601.xml" value="0.17314814814814813" />
+        <entry key="../../../../layout/compose-model-1633286125977.xml" value="0.17314814814814813" />
+        <entry key="../../../../layout/compose-model-1633286197492.xml" value="0.17314814814814813" />
         <entry key="..\:/Users/Alexander/AndroidStudioProjects/ComposeExperiments/app/src/main/res/drawable/ic_calendar.xml" value="0.4203125" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
