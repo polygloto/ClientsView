@@ -1,4 +1,4 @@
-package com.mikhailovalx.clientsview.core.navigation
+package com.mikhailovalx.clientsview.navigation
 
 import com.mikhailovalx.clientsview.R
 

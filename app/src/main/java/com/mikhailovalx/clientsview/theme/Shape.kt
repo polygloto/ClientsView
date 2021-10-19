@@ -1,4 +1,4 @@
-package com.mikhailovalx.clientsview.core.theme
+package com.mikhailovalx.clientsview.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

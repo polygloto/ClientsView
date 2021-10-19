@@ -1,4 +1,4 @@
-package com.mikhailovalx.clientsview.core.navigation
+package com.mikhailovalx.clientsview.navigation
 
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.mikhailovalx.clientsview.core.theme.WhiteColor
+import com.mikhailovalx.clientsview.theme.WhiteColor
 
 @Composable
 fun BottomNavigationBar(navController: NavController) {

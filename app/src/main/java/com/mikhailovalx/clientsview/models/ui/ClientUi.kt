@@ -1,6 +1,6 @@
-package com.mikhailovalx.clientsview.data
+package com.mikhailovalx.clientsview.models.ui
 
-data class Client(
+data class ClientUi(
     val name: String,
     val phone: String,
     val isImportant: Boolean

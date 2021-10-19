@@ -1,4 +1,4 @@
-package com.mikhailovalx.clientsview.core
+package com.mikhailovalx.clientsview.app
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

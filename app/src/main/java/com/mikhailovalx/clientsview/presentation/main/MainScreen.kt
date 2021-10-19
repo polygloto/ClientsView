@@ -1,8 +1,5 @@
-package com.mikhailovalx.clientsview.ui.main
+package com.mikhailovalx.clientsview.presentation.main
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.material.FabPosition
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
@@ -12,20 +9,11 @@ import androidx.compose.material.icons.rounded.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
-import com.mikhailovalx.clientsview.core.navigation.BottomNavigationBar
-import com.mikhailovalx.clientsview.core.navigation.Navigation
-import com.mikhailovalx.clientsview.core.theme.TurquoiseColor
-import com.mikhailovalx.clientsview.core.theme.WhiteColor
+import com.mikhailovalx.clientsview.navigation.BottomNavigationBar
+import com.mikhailovalx.clientsview.navigation.Navigation
+import com.mikhailovalx.clientsview.theme.TurquoiseColor
+import com.mikhailovalx.clientsview.theme.WhiteColor
 import com.mikhailovalx.clientsview.ui.action_bar.TopBar
-
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            MainScreen()
-        }
-    }
-}
 
 @Composable
 fun MainScreen() {

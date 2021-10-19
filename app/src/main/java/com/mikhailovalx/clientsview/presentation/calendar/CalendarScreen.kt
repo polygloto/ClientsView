@@ -1,4 +1,4 @@
-package com.mikhailovalx.clientsview.ui.calendar
+package com.mikhailovalx.clientsview.presentation.calendar
 
 import androidx.compose.runtime.Composable
 import com.mikhailovalx.clientsview.domain.MaterialPreview

@@ -1,4 +1,4 @@
-package com.mikhailovalx.clientsview.core.theme
+package com.mikhailovalx.clientsview.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

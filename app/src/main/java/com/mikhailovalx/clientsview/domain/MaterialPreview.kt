@@ -25,7 +25,7 @@ import be.sigmadelta.calpose.model.CalposeDate
 import be.sigmadelta.calpose.model.CalposeWidgets
 import be.sigmadelta.calpose.widgets.DefaultDay
 import be.sigmadelta.calpose.widgets.MaterialHeader
-import com.mikhailovalx.clientsview.core.theme.TurquoiseColor
+import com.mikhailovalx.clientsview.theme.TurquoiseColor
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.YearMonth
 import soup.compose.material.motion.Axis

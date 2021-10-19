@@ -1,20 +1,21 @@
-package com.mikhailovalx.clientsview.core.navigation
+package com.mikhailovalx.clientsview.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.mikhailovalx.clientsview.ui.calendar.CalendarScreen
+import com.mikhailovalx.clientsview.presentation.calendar.CalendarScreen
 import com.mikhailovalx.clientsview.ClientsScreen
 import com.mikhailovalx.clientsview.FinanceScreen
 import com.mikhailovalx.clientsview.SettingsScreen
-import com.mikhailovalx.clientsview.ui.client.ClientInfo
+import com.mikhailovalx.clientsview.presentation.client.ClientInfo
+import com.mikhailovalx.clientsview.presentation.main.MainViewModel
 
 @Composable
 fun Navigation(navController: NavHostController) {
     NavHost(navController, startDestination = BottomNavigationItem.Clients.route) {
         composable(BottomNavigationItem.Clients.route) {
-            ClientsScreen()
+            ClientsScreen(MainViewModel())
         }
         composable(BottomNavigationItem.Calendar.route) {
             CalendarScreen()

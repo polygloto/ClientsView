@@ -9,6 +9,8 @@ import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -19,14 +21,28 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.mikhailovalx.clientsview.core.theme.*
-import com.mikhailovalx.clientsview.data.Client
-import com.mikhailovalx.clientsview.core.mock.ClientsMock
+import com.mikhailovalx.clientsview.theme.*
+import com.mikhailovalx.clientsview.models.ui.ClientUi
+import com.mikhailovalx.clientsview.presentation.main.MainScreenState
+import com.mikhailovalx.clientsview.presentation.main.MainViewModel
 
 @Composable
-fun ClientsScreen() {
+fun ClientsScreen(
+    viewModel: MainViewModel
+) {
+
+    val state by viewModel.state.collectAsState(MainScreenState.initial())
+    when {
+        state.data.isNotEmpty() -> ClientsScreenContent(state.data)
+    }
+}
+
+@Composable
+fun ClientsScreenContent(
+    clients: List<ClientUi>
+) {
     LazyColumn {
-        items(ClientsMock.clientList) { client ->
+        items(clients) { client ->
             ClientCard(client = client)
         }
         item {
@@ -36,7 +52,7 @@ fun ClientsScreen() {
 }
 
 @Composable
-fun ClientCard(client: Client) {
+fun ClientCard(client: ClientUi) {
 
     val indicatorColor = if (client.isImportant) TurquoiseColor else GreenAccentColor
 
@@ -76,7 +92,8 @@ fun ClientCard(client: Client) {
             painter = painterResource(id = R.drawable.ic_arrow_right),
             tint = TurquoiseColor,
             contentDescription = null,
-            modifier = Modifier.align(Alignment.CenterEnd)
+            modifier = Modifier
+                .align(Alignment.CenterEnd)
                 .padding(end = 28.dp)
         )
     }
