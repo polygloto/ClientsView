@@ -1,49 +1,49 @@
 package com.mikhailovalx.clientsview.presentation.main
 
 import androidx.lifecycle.viewModelScope
-import com.mikhailovalx.clientsview.core.BaseReducer
 import com.mikhailovalx.clientsview.core.BaseViewModel
 import com.mikhailovalx.clientsview.domain.use_case.IGetClientsUseCase
 import com.mikhailovalx.clientsview.models.ui.ClientUi
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    //private val getClientsUseCase: IGetClientsUseCase
-) : BaseViewModel<MainScreenState, MainScreenContract>() {
+    private val getClientsUseCase: IGetClientsUseCase
+) : BaseViewModel<MainScreenState, MainScreenContract>(MainScreenState()) {
 
-    private val reducer = MainReducer(MainScreenState(emptyList()))
-    override val state: Flow<MainScreenState> get() = reducer.state
+    override fun reduce(oldState: MainScreenState, event: MainScreenContract) {
+        viewModelScope.launch {
+            val newState = when (event) {
+                is MainScreenContract.FetchEvent -> handleFetchEvent()
+                is MainScreenContract.OnClientClickEvent -> handleOnClientClickEvent()
+            }
+            setState(newState)
+        }
+
+    }
 
     init {
         viewModelScope.launch {
-            reducer.sendEvent(MainScreenContract.FetchEvent(emptyList()))
+            sendEvent(MainScreenContract.FetchEvent)
         }
     }
 
-    class MainReducer(initial: MainScreenState) : BaseReducer<MainScreenState, MainScreenContract>(initial) {
-        override fun reduce(oldState: MainScreenState, event: MainScreenContract) {
-            when(event) {
-                is MainScreenContract.FetchEvent -> handleFetchEvent()
-            }
-        }
+    private fun handleOnClientClickEvent(): MainScreenState {
+        val newList = state.value.data.toMutableList()
+        newList.add(
+            ClientUi(
+                name = "onClientClick",
+                phone = "---",
+                isImportant = false
+            )
+        )
+        return MainScreenState(newList)
+    }
 
-        private fun handleFetchEvent() {
-            CoroutineScope(Dispatchers.IO).launch {
-                val clients = listOf(
-                    ClientUi(
-                        name = "Alexander",
-                        phone = "89214043219",
-                        isImportant = false
-                    )
-                )
-                setState(MainScreenState(clients))
-            }
-        }
+    private suspend fun handleFetchEvent(): MainScreenState {
+        val clients = getClientsUseCase()
+        return MainScreenState(clients)
     }
 }

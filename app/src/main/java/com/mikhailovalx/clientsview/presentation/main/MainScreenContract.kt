@@ -7,14 +7,11 @@ import javax.annotation.concurrent.Immutable
 
 @Immutable
 sealed class MainScreenContract : IEvent {
-    data class FetchEvent(val clients: List<ClientUi>) : MainScreenContract()
+    object FetchEvent : MainScreenContract()
+    object OnClientClickEvent : MainScreenContract()
 }
 
 @Immutable
 data class MainScreenState(
-    val data: List<ClientUi>
-) : IState {
-    companion object {
-        fun initial() = MainScreenState(data = emptyList())
-    }
-}
+    val data: List<ClientUi> = emptyList()
+) : IState

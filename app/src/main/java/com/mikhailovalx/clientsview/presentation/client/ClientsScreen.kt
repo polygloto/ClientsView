@@ -1,6 +1,7 @@
-package com.mikhailovalx.clientsview
+package com.mikhailovalx.clientsview.presentation.client
 
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -21,29 +22,36 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.mikhailovalx.clientsview.theme.*
+import com.mikhailovalx.clientsview.R
 import com.mikhailovalx.clientsview.models.ui.ClientUi
-import com.mikhailovalx.clientsview.presentation.main.MainScreenState
+import com.mikhailovalx.clientsview.presentation.main.MainScreenContract
 import com.mikhailovalx.clientsview.presentation.main.MainViewModel
+import com.mikhailovalx.clientsview.theme.*
 
 @Composable
 fun ClientsScreen(
     viewModel: MainViewModel
 ) {
-
-    val state by viewModel.state.collectAsState(MainScreenState.initial())
+    val state by viewModel.state.collectAsState()
     when {
-        state.data.isNotEmpty() -> ClientsScreenContent(state.data)
+        state.data.isNotEmpty() -> ClientsScreenContent(
+            clients = state.data,
+            onClientClick = { viewModel.sendEvent(MainScreenContract.OnClientClickEvent) }
+        )
     }
 }
 
 @Composable
 fun ClientsScreenContent(
-    clients: List<ClientUi>
+    clients: List<ClientUi>,
+    onClientClick: () -> Unit,
 ) {
     LazyColumn {
         items(clients) { client ->
-            ClientCard(client = client)
+            ClientCard(
+                client = client,
+                onClientClick = onClientClick
+            )
         }
         item {
             Spacer(modifier = Modifier.height(60.dp))
@@ -52,11 +60,14 @@ fun ClientsScreenContent(
 }
 
 @Composable
-fun ClientCard(client: ClientUi) {
+fun ClientCard(
+    client: ClientUi,
+    onClientClick: () -> Unit
+) {
 
-    val indicatorColor = if (client.isImportant) TurquoiseColor else GreenAccentColor
+    val indicatorColor = if (client.isImportant) GreenAccentColor else TurquoiseColor
 
-    Box {
+    Box(modifier = Modifier.clickable { onClientClick() }) {
         CircleShape(
             indicatorColor,
             size = 54.dp,
