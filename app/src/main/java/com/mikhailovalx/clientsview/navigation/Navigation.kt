@@ -26,7 +26,7 @@ fun Navigation(navController: NavHostController) {
         composable(BottomNavigationItem.Settings.route) {
             SettingsScreen()
         }
-        composable("nav_client_info"){
+        composable(Screen.ClientInfo.route){
             ClientInfo()
         }
     }

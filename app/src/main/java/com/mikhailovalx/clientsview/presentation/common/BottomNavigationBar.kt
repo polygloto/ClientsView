@@ -1,9 +1,13 @@
-package com.mikhailovalx.clientsview.navigation
+package com.mikhailovalx.clientsview.presentation.common
 
+import androidx.compose.animation.animateContentSize
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -11,6 +15,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.mikhailovalx.clientsview.navigation.BottomNavigationItem
 import com.mikhailovalx.clientsview.theme.WhiteColor
 
 @Composable
@@ -26,7 +31,8 @@ fun BottomNavigationBar(navController: NavController) {
         backgroundColor = WhiteColor,
         cutoutShape = CircleShape,
         contentColor = Color.Blue,
-        elevation = 10.dp
+        elevation = 10.dp,
+        contentPadding = PaddingValues(0.dp)
     ) {
         items.forEachIndexed { index, item ->
             if (index == 2) {
@@ -46,7 +52,7 @@ fun BottomNavigationBar(navController: NavController) {
 
             BottomNavigationItem(
                 icon = { Icon(painterResource(id = item.icon), contentDescription = item.title) },
-                label = { Text(text = item.title, fontSize = 10.sp) },
+                label = { Text(text = item.title, fontSize = 10.sp, maxLines = 1) },
                 selectedContentColor = Color.Black,
                 unselectedContentColor = Color.Black.copy(0.4f),
                 alwaysShowLabel = true,
