@@ -1,4 +1,4 @@
-package com.mikhailovalx.clientsview.presentation.main
+package com.mikhailovalx.clientsview.presentation.client
 
 import androidx.lifecycle.viewModelScope
 import com.mikhailovalx.clientsview.core.base.BaseViewModel
@@ -9,15 +9,15 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(
+class ClientsViewModel @Inject constructor(
     private val getClientsUseCase: IGetClientsUseCase
-) : BaseViewModel<MainScreenState, MainScreenContract>(MainScreenState()) {
+) : BaseViewModel<ClientsScreenState, ClientsScreenContract>(ClientsScreenState()) {
 
-    override fun reduce(oldState: MainScreenState, event: MainScreenContract) {
+    override fun reduce(oldState: ClientsScreenState, event: ClientsScreenContract) {
         viewModelScope.launch {
             val newState = when (event) {
-                is MainScreenContract.FetchEvent -> handleFetchEvent()
-                is MainScreenContract.OnClientClickEvent -> handleOnClientClickEvent()
+                is ClientsScreenContract.FetchEvent -> handleFetchEvent()
+                is ClientsScreenContract.OnClientClickEvent -> handleOnClientClickEvent()
             }
             setState(newState)
         }
@@ -25,11 +25,11 @@ class MainViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            sendEvent(MainScreenContract.FetchEvent)
+            sendEvent(ClientsScreenContract.FetchEvent)
         }
     }
 
-    private fun handleOnClientClickEvent(): MainScreenState {
+    private fun handleOnClientClickEvent(): ClientsScreenState {
         val newList = state.value.data.toMutableList()
         newList.add(
             ClientUi(
@@ -38,11 +38,11 @@ class MainViewModel @Inject constructor(
                 isImportant = false
             )
         )
-        return MainScreenState(newList)
+        return ClientsScreenState(newList)
     }
 
-    private suspend fun handleFetchEvent(): MainScreenState {
+    private suspend fun handleFetchEvent(): ClientsScreenState {
         val clients = getClientsUseCase()
-        return MainScreenState(clients)
+        return ClientsScreenState(clients)
     }
 }

@@ -24,19 +24,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.mikhailovalx.clientsview.R
 import com.mikhailovalx.clientsview.models.ui.ClientUi
-import com.mikhailovalx.clientsview.presentation.main.MainScreenContract
-import com.mikhailovalx.clientsview.presentation.main.MainViewModel
 import com.mikhailovalx.clientsview.theme.*
 
 @Composable
 fun ClientsScreen(
-    viewModel: MainViewModel
+    viewModel: ClientsViewModel
 ) {
     val state by viewModel.state.collectAsState()
     when {
         state.data.isNotEmpty() -> ClientsScreenContent(
             clients = state.data,
-            onClientClick = { viewModel.sendEvent(MainScreenContract.OnClientClickEvent) }
+            onClientClick = { viewModel.sendEvent(ClientsScreenContract.OnClientClickEvent) }
         )
     }
 }

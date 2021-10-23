@@ -11,7 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.mikhailovalx.clientsview.navigation.NavigationScreen
 import com.mikhailovalx.clientsview.navigation.ScreenRoutes
-import com.mikhailovalx.clientsview.presentation.client.ClientInfo
+import com.mikhailovalx.clientsview.presentation.client.info.ClientInfo
 import com.mikhailovalx.clientsview.theme.MainTheme
 
 @Composable
