@@ -1,6 +1,8 @@
-package com.mikhailovalx.clientsview.core
+package com.mikhailovalx.clientsview.core.base
 
 import androidx.lifecycle.ViewModel
+import com.mikhailovalx.clientsview.core.IEvent
+import com.mikhailovalx.clientsview.core.IState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 

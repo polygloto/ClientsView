@@ -1,7 +1,7 @@
 package com.mikhailovalx.clientsview.presentation.main
 
 import androidx.lifecycle.viewModelScope
-import com.mikhailovalx.clientsview.core.BaseViewModel
+import com.mikhailovalx.clientsview.core.base.BaseViewModel
 import com.mikhailovalx.clientsview.domain.use_case.IGetClientsUseCase
 import com.mikhailovalx.clientsview.models.ui.ClientUi
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,7 +21,6 @@ class MainViewModel @Inject constructor(
             }
             setState(newState)
         }
-
     }
 
     init {

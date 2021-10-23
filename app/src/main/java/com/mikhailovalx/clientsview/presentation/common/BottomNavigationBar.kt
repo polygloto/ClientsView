@@ -23,7 +23,7 @@ fun BottomNavigationBar(navController: NavController) {
     val items = listOf(
         BottomNavigationItem.Clients,
         BottomNavigationItem.Calendar,
-        BottomNavigationItem.fab,
+        BottomNavigationItem.CreateButton,
         BottomNavigationItem.Finance,
         BottomNavigationItem.Settings
     )
@@ -37,13 +37,7 @@ fun BottomNavigationBar(navController: NavController) {
         items.forEachIndexed { index, item ->
             if (index == 2) {
                 // empty item for fab
-                BottomNavigationItem(
-                    icon = {},
-                    label = { },
-                    selected = false,
-                    onClick = { },
-                    enabled = false
-                )
+                BottomNavigationItem(icon = { }, label = { }, selected = false, onClick = { }, enabled = false)
                 return@forEachIndexed
             }
 
@@ -67,9 +61,9 @@ fun BottomNavigationBar(navController: NavController) {
                                 saveState = true
                             }
                         }
-                        // Avoid multiple copies of the same destination when reselecting the same item
+                        // Avoid multiple copies of the same destination when re-selecting the same item
                         launchSingleTop = true
-                        // Restore state when reselecting a previously selected item
+                        // Restore state when re-selecting a previously selected item
                         restoreState = true
                     }
                 }

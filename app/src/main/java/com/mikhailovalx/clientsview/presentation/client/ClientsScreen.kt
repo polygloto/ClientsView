@@ -96,7 +96,7 @@ fun ClientCard(
         Icon(
             painter = painterResource(id = R.drawable.ic_heart),
             contentDescription = null,
-            Modifier.padding(start = 32.dp, top = 35.dp)
+            modifier = Modifier.padding(start = 32.dp, top = 35.dp)
         )
 
         Icon(

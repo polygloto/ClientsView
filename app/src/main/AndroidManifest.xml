@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/ProjectTheme">
         <activity
-            android:name="com.mikhailovalx.clientsview.presentation.main.activity.MainActivity"
+            android:name="com.mikhailovalx.clientsview.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/ProjectTheme">

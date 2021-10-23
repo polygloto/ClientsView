@@ -11,16 +11,18 @@ private val DarkColorPalette = darkColors(
 )
 
 private val LightColorPalette = lightColors(
-
+    primary = TurquoiseColor, // cursors
+    secondary = GreenAccentColor, // ???
+    surface = WhiteColor,
 )
 
 @Composable
-fun MyApplicationTheme(
+fun MainTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable() () -> Unit
 ) {
     val colors = if (darkTheme) {
-        DarkColorPalette
+        LightColorPalette // DarkColorPalette TODO darkTheme
     } else {
         LightColorPalette
     }

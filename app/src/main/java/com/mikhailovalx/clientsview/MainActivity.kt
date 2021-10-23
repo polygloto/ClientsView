@@ -1,4 +1,4 @@
-package com.mikhailovalx.clientsview.presentation.main.activity
+package com.mikhailovalx.clientsview
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
