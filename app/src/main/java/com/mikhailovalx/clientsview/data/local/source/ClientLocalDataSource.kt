@@ -1,4 +1,4 @@
-package com.mikhailovalx.clientsview.data.local
+package com.mikhailovalx.clientsview.data.local.source
 
 class ClientLocalDataSource() : IClientLocalDataSource {
     override suspend fun getClients() {

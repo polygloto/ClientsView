@@ -1,7 +1,7 @@
-package com.mikhailovalx.clientsview.data.di
+package com.mikhailovalx.clientsview.di
 
-import com.mikhailovalx.clientsview.data.local.ClientLocalDataSource
-import com.mikhailovalx.clientsview.data.local.IClientLocalDataSource
+import com.mikhailovalx.clientsview.data.local.source.ClientLocalDataSource
+import com.mikhailovalx.clientsview.data.local.source.IClientLocalDataSource
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

@@ -1,4 +1,4 @@
-package com.mikhailovalx.clientsview.data.di
+package com.mikhailovalx.clientsview.di
 
 import com.mikhailovalx.clientsview.domain.use_case.GetClientsUseCase
 import com.mikhailovalx.clientsview.domain.use_case.IGetClientsUseCase

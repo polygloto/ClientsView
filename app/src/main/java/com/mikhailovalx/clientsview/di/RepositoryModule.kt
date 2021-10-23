@@ -1,4 +1,4 @@
-package com.mikhailovalx.clientsview.data.di
+package com.mikhailovalx.clientsview.di
 
 import com.mikhailovalx.clientsview.data.repository.ClientRepository
 import com.mikhailovalx.clientsview.data.repository.IClientRepository
