@@ -23,7 +23,7 @@ import com.mikhailovalx.clientsview.theme.TurquoiseColor
 import com.mikhailovalx.clientsview.theme.WhiteColor
 
 @Composable
-fun DefaultLabel(
+fun LabelView(
     modifier: Modifier = Modifier,
     text: String,
     title: String? = null,
@@ -72,7 +72,12 @@ fun DefaultLabel(
                 Text(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(start = textStartPadding, end = 16.dp, top = 16.dp, bottom = 16.dp),
+                        .padding(
+                            start = textStartPadding,
+                            end = 16.dp,
+                            top = 16.dp,
+                            bottom = 16.dp
+                        ),
                     text = text,
                 )
             }
@@ -84,8 +89,8 @@ fun DefaultLabel(
 
 @Composable
 @Preview
-fun DefaultLabel_Preview() {
-    DefaultLabel(
+fun LabelView_Preview() {
+    LabelView(
         icon = R.drawable.ic_person,
         text = "Михайлов Александр",
         title = "Имя клиента"

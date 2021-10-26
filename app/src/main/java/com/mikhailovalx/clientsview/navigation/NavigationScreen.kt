@@ -12,7 +12,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.mikhailovalx.clientsview.FinanceScreen
+import com.mikhailovalx.clientsview.presentation.finance.FinanceScreen
 import com.mikhailovalx.clientsview.SettingsScreen
 import com.mikhailovalx.clientsview.presentation.calendar.CalendarScreen
 import com.mikhailovalx.clientsview.presentation.client.ClientsScreen

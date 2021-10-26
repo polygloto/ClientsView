@@ -1,6 +1,5 @@
 package com.mikhailovalx.clientsview.presentation.client
 
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -14,16 +13,12 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.mikhailovalx.clientsview.R
 import com.mikhailovalx.clientsview.models.ui.ClientUi
+import com.mikhailovalx.clientsview.presentation.common.CircleView
 import com.mikhailovalx.clientsview.theme.*
 
 @Composable
@@ -66,11 +61,10 @@ fun ClientCard(
     val indicatorColor = if (client.isImportant) GreenAccentColor else TurquoiseColor
 
     Box(modifier = Modifier.clickable { onClientClick() }) {
-        CircleShape(
-            indicatorColor,
+        CircleView(
+            color = indicatorColor,
             size = 54.dp,
-            paddingStart = 12.dp,
-            paddingTop = 14.dp
+            modifier = Modifier.padding(start = 12.dp, top = 14.dp)
         )
 
         Card(
@@ -81,14 +75,13 @@ fun ClientCard(
             elevation = 5.dp,
             shape = RoundedCornerShape(10.dp)
         ) {
-            ClientCardInfo(client.name, client.phone)
+            ClientCardText(client.name, client.phone)
         }
 
-        CircleShape(
+        CircleView(
             color = WhiteColor,
             size = 38.dp,
-            paddingStart = 20.dp,
-            paddingTop = 22.dp
+            modifier = Modifier.padding(start = 20.dp, top = 22.dp)
         )
 
         Icon(
@@ -109,43 +102,22 @@ fun ClientCard(
 }
 
 @Composable
-fun ClientCardInfo(name: String, phone: String) {
+fun ClientCardText(name: String, phone: String) {
     Column(
         modifier = Modifier.padding(top = 12.dp, bottom = 12.dp, start = 26.dp)
     ) {
         Text(
-            buildAnnotatedString {
-                withStyle(style = SpanStyle(color = PrimaryTextColor, fontSize = 14.sp)) {
-                    append(name)
-                }
-            }
+            text = name,
+            color = PrimaryTextColor,
+            fontSize = 14.sp
         )
-        Spacer(modifier = Modifier.height(4.dp))
-        Text(
-            buildAnnotatedString {
-                withStyle(style = SpanStyle(color = SecondaryTextColor, fontSize = 12.sp)) {
-                    append(phone)
-                }
-            }
-        )
-    }
-}
 
-@Composable
-fun CircleShape(
-    color: Color,
-    size: Dp,
-    paddingTop: Dp,
-    paddingStart: Dp
-) {
-    Card(
-        modifier = Modifier.padding(top = paddingTop, start = paddingStart),
-        shape = androidx.compose.foundation.shape.CircleShape,
-        elevation = 3.dp
-    ) {
-        Canvas(
-            modifier = Modifier.size(size),
-            onDraw = { drawCircle(color = color) }
+        Spacer(modifier = Modifier.height(4.dp))
+
+        Text(
+            text = phone,
+            color = SecondaryTextColor,
+            fontSize = 12.sp
         )
     }
 }
