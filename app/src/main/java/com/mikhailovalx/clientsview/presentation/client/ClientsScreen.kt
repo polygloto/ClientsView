@@ -13,12 +13,15 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.mikhailovalx.clientsview.R
 import com.mikhailovalx.clientsview.models.ui.ClientUi
 import com.mikhailovalx.clientsview.presentation.common.CircleView
+import com.mikhailovalx.clientsview.presentation.common.SemiCircleView
 import com.mikhailovalx.clientsview.theme.*
 
 @Composable
@@ -60,35 +63,23 @@ fun ClientCard(
 
     val indicatorColor = if (client.isImportant) GreenAccentColor else TurquoiseColor
 
-    Box(modifier = Modifier.clickable { onClientClick() }) {
-        CircleView(
-            color = indicatorColor,
-            size = 54.dp,
-            modifier = Modifier.padding(start = 12.dp, top = 14.dp)
-        )
-
+    Box(
+        modifier = Modifier
+            .clickable { onClientClick() }
+            .padding(horizontal = 24.dp, vertical = 6.dp)
+    ) {
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 42.dp, end = 12.dp, top = 8.dp, bottom = 8.dp)
+                .padding(start = 27.dp)
                 .height(68.dp),
-            elevation = 5.dp,
+            elevation = 4.dp,
             shape = RoundedCornerShape(10.dp)
         ) {
             ClientCardText(client.name, client.phone)
         }
 
-        CircleView(
-            color = WhiteColor,
-            size = 38.dp,
-            modifier = Modifier.padding(start = 20.dp, top = 22.dp)
-        )
-
-        Icon(
-            painter = painterResource(id = R.drawable.ic_heart),
-            contentDescription = null,
-            modifier = Modifier.padding(start = 32.dp, top = 35.dp)
-        )
+        IndicatorView(indicatorColor)
 
         Icon(
             painter = painterResource(id = R.drawable.ic_arrow_right),
@@ -96,7 +87,8 @@ fun ClientCard(
             contentDescription = null,
             modifier = Modifier
                 .align(Alignment.CenterEnd)
-                .padding(end = 28.dp)
+                .padding(16.dp)
+
         )
     }
 }
@@ -120,4 +112,35 @@ fun ClientCardText(name: String, phone: String) {
             fontSize = 12.sp
         )
     }
+}
+
+@Composable
+fun IndicatorView(
+    indicatorColor: Color
+) {
+    Box(
+        modifier = Modifier.padding(vertical = 8.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        SemiCircleView(
+            color = indicatorColor,
+            size = 54.dp,
+        )
+
+        CircleView(
+            color = WhiteColor,
+            size = 38.dp,
+        )
+
+        Icon(
+            painter = painterResource(id = R.drawable.ic_heart),
+            contentDescription = null
+        )
+    }
+}
+
+@Preview
+@Composable
+fun ClientsScreen_Preview() {
+    IndicatorView(TurquoiseColor)
 }
