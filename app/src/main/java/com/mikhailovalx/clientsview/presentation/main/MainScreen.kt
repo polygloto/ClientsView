@@ -11,7 +11,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.mikhailovalx.clientsview.navigation.NavigationScreen
 import com.mikhailovalx.clientsview.navigation.ScreenRoutes
-import com.mikhailovalx.clientsview.presentation.client.info.ClientInfo
+import com.mikhailovalx.clientsview.presentation.client.create.CreateClientScreen
+import com.mikhailovalx.clientsview.presentation.client.info.ClientInfoScreen
 import com.mikhailovalx.clientsview.theme.MainTheme
 
 @Composable
@@ -26,7 +27,12 @@ fun MainScreen() {
                     modifier = Modifier.weight(1F)
                 ) {
                     composable(ScreenRoutes.Main.route) { NavigationScreen(navController) }
-                    composable(ScreenRoutes.ClientInfo.route) { ClientInfo() }
+                    composable(ScreenRoutes.ClientInfo.route) { ClientInfoScreen() }
+                    composable(ScreenRoutes.CreateEditClient.route) {
+                        CreateClientScreen(
+                            onBackPressed = { navController.popBackStack() }
+                        )
+                    }
                 }
             }
         }

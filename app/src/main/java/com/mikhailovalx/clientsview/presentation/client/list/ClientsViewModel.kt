@@ -1,4 +1,4 @@
-package com.mikhailovalx.clientsview.presentation.client
+package com.mikhailovalx.clientsview.presentation.client.list
 
 import androidx.lifecycle.viewModelScope
 import com.mikhailovalx.clientsview.core.base.BaseViewModel
@@ -30,7 +30,7 @@ class ClientsViewModel @Inject constructor(
     }
 
     private fun handleOnClientClickEvent(): ClientsScreenState {
-        val newList = state.value.data.toMutableList()
+        val newList = state.value.clients.toMutableList()
         newList.add(
             ClientUi(
                 name = "onClientClick",

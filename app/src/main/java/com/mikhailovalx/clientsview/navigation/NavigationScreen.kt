@@ -15,7 +15,7 @@ import androidx.navigation.compose.rememberNavController
 import com.mikhailovalx.clientsview.presentation.finance.FinanceScreen
 import com.mikhailovalx.clientsview.SettingsScreen
 import com.mikhailovalx.clientsview.presentation.calendar.CalendarScreen
-import com.mikhailovalx.clientsview.presentation.client.ClientsScreen
+import com.mikhailovalx.clientsview.presentation.client.list.ClientsScreen
 import com.mikhailovalx.clientsview.presentation.common.BottomNavigationBar
 import com.mikhailovalx.clientsview.theme.TurquoiseColor
 import com.mikhailovalx.clientsview.theme.WhiteColor
@@ -30,7 +30,7 @@ fun NavigationScreen(
         floatingActionButton = {
             FloatingActionButton(
                 backgroundColor = TurquoiseColor,
-                onClick = { navHostController.open(ScreenRoutes.ClientInfo) }
+                onClick = { navHostController.open(ScreenRoutes.CreateEditClient) }
             ) {
                 Icon(imageVector = Icons.Rounded.Add, contentDescription = "", tint = WhiteColor)
             }

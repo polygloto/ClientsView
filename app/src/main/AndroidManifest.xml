@@ -9,9 +9,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/ProjectTheme">
+        android:theme="@style/ProjectTheme"
+        android:fullBackupContent="true">
         <activity
             android:name="com.mikhailovalx.clientsview.MainActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/ProjectTheme">

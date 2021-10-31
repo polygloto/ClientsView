@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Clients View</string>
+    <string name="create_client_title">Новый клиент</string>
+    <string name="edit_client_title">Редактирование</string>
+    <string name="name">Имя</string>
+    <string name="phone">Телефон</string>
+    <string name="birthday">Дата роджения</string>
+    <string name="comment">Комментарий</string>
+    <string name="count_of_skips">Количество прогулов</string>
 </resources>

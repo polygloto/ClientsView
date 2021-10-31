@@ -25,7 +25,7 @@ fun StepperView(
     modifier: Modifier = Modifier,
     title: String? = null,
     initialValue: Int,
-    height: Dp = 50.dp,
+    height: Dp = 54.dp,
     width: Dp = 128.dp,
 ) {
 

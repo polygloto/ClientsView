@@ -10,7 +10,7 @@ import com.mikhailovalx.clientsview.presentation.common.LabelView
 import com.mikhailovalx.clientsview.presentation.common.StepperView
 
 @Composable
-fun ClientInfo() {
+fun ClientInfoScreen() {
     Column {
         LabelView(
             icon = R.drawable.ic_person,

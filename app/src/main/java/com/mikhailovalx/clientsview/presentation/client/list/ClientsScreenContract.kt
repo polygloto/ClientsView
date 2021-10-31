@@ -1,4 +1,4 @@
-package com.mikhailovalx.clientsview.presentation.client
+package com.mikhailovalx.clientsview.presentation.client.list
 
 import com.mikhailovalx.clientsview.core.IEvent
 import com.mikhailovalx.clientsview.core.IState
@@ -13,5 +13,5 @@ sealed class ClientsScreenContract : IEvent {
 
 @Immutable
 data class ClientsScreenState(
-    val data: List<ClientUi> = emptyList()
+    val clients: List<ClientUi> = emptyList()
 ) : IState

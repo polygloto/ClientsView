@@ -4,34 +4,38 @@ import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.Card
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.mikhailovalx.clientsview.R
-import com.mikhailovalx.clientsview.theme.DividerColor
-import com.mikhailovalx.clientsview.theme.LabelTextColor
-import com.mikhailovalx.clientsview.theme.TurquoiseColor
-import com.mikhailovalx.clientsview.theme.WhiteColor
+import com.mikhailovalx.clientsview.theme.*
 
 @Composable
-fun LabelView(
+fun InputTextView(
     modifier: Modifier = Modifier,
-    text: String,
     title: String? = null,
+    textValue: String = "",
     @DrawableRes icon: Int? = null,
-    iconTint: Color = TurquoiseColor
+    iconTint: Color = TurquoiseColor,
+    iconHeight: Dp = 10.dp,
+    iconWidth: Dp = 10.dp,
+    minHeight: Dp = 54.dp
 ) {
     val textStartPadding = if (icon == null) 16.dp else 10.dp
+    var textFieldState by remember { mutableStateOf(textValue) }
 
     Column(modifier = modifier) {
         if (title != null) {
@@ -47,7 +51,7 @@ fun LabelView(
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .defaultMinSize(minHeight = 50.dp)
+                .defaultMinSize(minHeight = minHeight)
                 .background(WhiteColor),
             elevation = 4.dp,
             shape = RoundedCornerShape(10.dp)
@@ -57,10 +61,12 @@ fun LabelView(
 
                 if (icon != null) {
                     Icon(
+                        modifier = Modifier
+                            .padding(start = 16.dp, end = 10.dp)
+                            .size(height = iconHeight, width = iconWidth),
                         painter = painterResource(id = icon),
                         tint = iconTint,
-                        contentDescription = null,
-                        modifier = Modifier.padding(start = 16.dp, end = 10.dp)
+                        contentDescription = null
                     )
 
                     Divider(
@@ -71,30 +77,25 @@ fun LabelView(
                     )
                 }
 
-                Text(
+                BasicTextField(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(
-                            start = textStartPadding,
-                            end = 16.dp,
-                            top = 16.dp,
-                            bottom = 16.dp
-                        ),
-                    text = text,
+                        .padding(start = textStartPadding, end = 16.dp, top = 16.dp, bottom = 16.dp)
+                        .fillMaxWidth(),
+                    value = textFieldState,
+                    onValueChange = { textFieldState = it },
+                    cursorBrush = SolidColor(TurquoiseColor),
                 )
             }
         }
     }
-
-
 }
 
 @Composable
 @Preview
-fun LabelView_Preview() {
-    LabelView(
+fun InputTextView_Preview() {
+    InputTextView(
         icon = R.drawable.ic_person,
-        text = "Михайлов Александр",
-        title = "Имя клиента"
+        title = "Имя клиента",
+        iconTint = SecondaryColor
     )
 }
