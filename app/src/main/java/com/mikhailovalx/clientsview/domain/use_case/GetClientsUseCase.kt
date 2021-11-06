@@ -1,28 +1,17 @@
 package com.mikhailovalx.clientsview.domain.use_case
 
 import com.mikhailovalx.clientsview.core.IUseCase
-import com.mikhailovalx.clientsview.models.ui.ClientUi
+import com.mikhailovalx.clientsview.core.extensions.convertAll
+import com.mikhailovalx.clientsview.data.repository.ClientRepository
+import com.mikhailovalx.clientsview.data.repository.IClientRepository
+import com.mikhailovalx.clientsview.models.client.ClientUi
 import javax.inject.Inject
 
-class GetClientsUseCase @Inject constructor() : IGetClientsUseCase {
+class GetClientsUseCase @Inject constructor(
+    private val clientRepository: IClientRepository
+) : IGetClientsUseCase {
     override suspend fun invoke(): List<ClientUi> {
-        return listOf(
-            ClientUi(
-                name = "Alexander",
-                phone = "89214043219",
-                isImportant = true
-            ),
-            ClientUi(
-                name = "Viktoriya",
-                phone = "89214043219",
-                isImportant = false
-            ),
-            ClientUi(
-                name = "Bob",
-                phone = "89214043219",
-                isImportant = true
-            )
-        )
+        return clientRepository.getClients().convertAll()
     }
 }
 

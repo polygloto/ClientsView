@@ -3,7 +3,6 @@ package com.mikhailovalx.clientsview.presentation.client.list
 import androidx.lifecycle.viewModelScope
 import com.mikhailovalx.clientsview.core.base.BaseViewModel
 import com.mikhailovalx.clientsview.domain.use_case.IGetClientsUseCase
-import com.mikhailovalx.clientsview.models.ui.ClientUi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -11,13 +10,15 @@ import javax.inject.Inject
 @HiltViewModel
 class ClientsViewModel @Inject constructor(
     private val getClientsUseCase: IGetClientsUseCase
-) : BaseViewModel<ClientsScreenState, ClientsScreenContract>(ClientsScreenState()) {
+) : BaseViewModel<ClientsScreenState, ClientsScreenEvent>() {
 
-    override fun reduce(oldState: ClientsScreenState, event: ClientsScreenContract) {
+    override val initialState: ClientsScreenState = ClientsScreenState.initial
+
+    override fun reduce(oldState: ClientsScreenState, event: ClientsScreenEvent) {
         viewModelScope.launch {
             val newState = when (event) {
-                is ClientsScreenContract.FetchEvent -> handleFetchEvent()
-                is ClientsScreenContract.OnClientClickEvent -> handleOnClientClickEvent()
+                is ClientsScreenEvent.FetchEvent -> handleFetchEvent()
+                is ClientsScreenEvent.OnClientClickEvent -> handleOnClientClickEvent(oldState)
             }
             setState(newState)
         }
@@ -25,20 +26,12 @@ class ClientsViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            sendEvent(ClientsScreenContract.FetchEvent)
+            sendEvent(ClientsScreenEvent.FetchEvent)
         }
     }
 
-    private fun handleOnClientClickEvent(): ClientsScreenState {
-        val newList = state.value.clients.toMutableList()
-        newList.add(
-            ClientUi(
-                name = "onClientClick",
-                phone = "---",
-                isImportant = false
-            )
-        )
-        return ClientsScreenState(newList)
+    private fun handleOnClientClickEvent(oldState: ClientsScreenState): ClientsScreenState {
+        return oldState
     }
 
     private suspend fun handleFetchEvent(): ClientsScreenState {

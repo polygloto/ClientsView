@@ -27,15 +27,15 @@ import com.mikhailovalx.clientsview.theme.*
 fun InputTextView(
     modifier: Modifier = Modifier,
     title: String? = null,
-    textValue: String = "",
+    textValue: String,
     @DrawableRes icon: Int? = null,
+    onValueChange: (String) -> Unit,
     iconTint: Color = TurquoiseColor,
     iconHeight: Dp = 10.dp,
     iconWidth: Dp = 10.dp,
     minHeight: Dp = 54.dp
 ) {
     val textStartPadding = if (icon == null) 16.dp else 10.dp
-    var textFieldState by remember { mutableStateOf(textValue) }
 
     Column(modifier = modifier) {
         if (title != null) {
@@ -50,7 +50,7 @@ fun InputTextView(
 
         Card(
             modifier = Modifier
-                .fillMaxWidth()
+                .height(IntrinsicSize.Min)
                 .defaultMinSize(minHeight = minHeight)
                 .background(WhiteColor),
             elevation = 4.dp,
@@ -73,7 +73,8 @@ fun InputTextView(
                         color = DividerColor,
                         modifier = Modifier
                             .width(1.dp)
-                            .height(22.dp)
+                            .fillMaxHeight()
+                            .padding(vertical = 14.dp)
                     )
                 }
 
@@ -81,8 +82,8 @@ fun InputTextView(
                     modifier = Modifier
                         .padding(start = textStartPadding, end = 16.dp, top = 16.dp, bottom = 16.dp)
                         .fillMaxWidth(),
-                    value = textFieldState,
-                    onValueChange = { textFieldState = it },
+                    value = textValue,
+                    onValueChange = onValueChange,
                     cursorBrush = SolidColor(TurquoiseColor),
                 )
             }
@@ -96,6 +97,8 @@ fun InputTextView_Preview() {
     InputTextView(
         icon = R.drawable.ic_person,
         title = "Имя клиента",
-        iconTint = SecondaryColor
+        iconTint = SecondaryColor,
+        textValue = "",
+        onValueChange = { }
     )
 }

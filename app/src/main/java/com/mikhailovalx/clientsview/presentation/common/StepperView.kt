@@ -1,6 +1,7 @@
 package com.mikhailovalx.clientsview.presentation.common
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -24,12 +25,11 @@ import com.mikhailovalx.clientsview.theme.WhiteColor
 fun StepperView(
     modifier: Modifier = Modifier,
     title: String? = null,
-    initialValue: Int,
+    onValueChange: (Int) -> Unit,
+    stepperValue: Int = 0,
     height: Dp = 54.dp,
     width: Dp = 128.dp,
 ) {
-
-    val stepperValue = initialValue
 
     Column(modifier = modifier) {
         if (title != null) {
@@ -55,9 +55,21 @@ fun StepperView(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                StepPrevious()
+                StepPrevious(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .width(50.dp)
+                        .clickable { if (stepperValue != 0) { onValueChange(stepperValue.dec()) } }
+                )
+
                 Text(text = stepperValue.toString())
-                StepNext()
+
+                StepNext(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .width(50.dp)
+                        .clickable { onValueChange(stepperValue.inc()) }
+                )
             }
         }
     }
@@ -65,11 +77,10 @@ fun StepperView(
 
 @Composable
 fun StepPrevious(
-    height: Dp = 50.dp,
-    width: Dp = 50.dp
+    modifier: Modifier = Modifier,
 ) {
     Box(
-        modifier = Modifier.size(height = height, width = width),
+        modifier = modifier,
         contentAlignment = Alignment.Center
     ) {
         CircleView(size = 16.dp, color = TurquoiseColor)
@@ -85,11 +96,10 @@ fun StepPrevious(
 
 @Composable
 fun StepNext(
-    height: Dp = 50.dp,
-    width: Dp = 50.dp
+    modifier: Modifier = Modifier,
 ) {
     Box(
-        modifier = Modifier.size(height = height, width = width),
+        modifier = modifier,
         contentAlignment = Alignment.Center
     ) {
         CircleView(size = 16.dp, color = TurquoiseColor)
@@ -107,6 +117,6 @@ fun StepNext(
 @Preview
 fun StepperView_Preview() {
     StepperView(
-        initialValue = 0
+        onValueChange = { }
     )
 }

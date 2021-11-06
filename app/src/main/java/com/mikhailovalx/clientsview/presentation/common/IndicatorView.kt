@@ -6,12 +6,14 @@ import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.mikhailovalx.clientsview.R
 import com.mikhailovalx.clientsview.theme.GreenAccentColor
+import com.mikhailovalx.clientsview.theme.IndicatorIconColor
 import com.mikhailovalx.clientsview.theme.TurquoiseColor
 import com.mikhailovalx.clientsview.theme.WhiteColor
 
@@ -23,9 +25,13 @@ fun IndicatorView(
     backCircleSize: Dp = 54.dp,
     frontCircleSize: Dp = 38.dp,
     iconHeight: Dp = 13.dp,
-    iconWidth: Dp = 14.dp
+    iconWidth: Dp = 14.dp,
+    indicatorOnColor: Color = GreenAccentColor,
+    indicatorOffColor: Color = TurquoiseColor,
 ) {
-    val indicatorColor = if (isImportant) GreenAccentColor else TurquoiseColor
+    val indicatorColor = if (isImportant) indicatorOnColor else indicatorOffColor
+    val iconId = if (isImportant) R.drawable.ic_heart_green else R.drawable.ic_heart
+    val iconTint = if (isImportant) indicatorOnColor else IndicatorIconColor
 
     Box(
         modifier = modifier,
@@ -49,9 +55,11 @@ fun IndicatorView(
         )
 
         Icon(
-            modifier = Modifier.size(height = iconHeight, width = iconWidth),
-            painter = painterResource(id = R.drawable.ic_heart),
-            contentDescription = null
+            modifier = Modifier
+                .size(height = iconHeight, width = iconWidth),
+            painter = painterResource(id = iconId),
+            contentDescription = null,
+            tint = iconTint
         )
     }
 }

@@ -3,7 +3,7 @@ package com.mikhailovalx.clientsview.di
 import android.content.Context
 import androidx.room.Room
 import com.mikhailovalx.clientsview.data.local.database.ClientsViewDatabase
-import com.mikhailovalx.clientsview.data.local.database.dao.ClientDao
+import com.mikhailovalx.clientsview.data.local.database.dao.IClientDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,5 +27,5 @@ class RoomModule {
 
     @Provides
     @Singleton
-    fun provideClientDao(database: ClientsViewDatabase): ClientDao = database.clientDao()
+    fun provideClientDao(database: ClientsViewDatabase): IClientDao = database.clientDao()
 }

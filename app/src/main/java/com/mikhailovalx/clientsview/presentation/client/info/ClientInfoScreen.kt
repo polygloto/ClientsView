@@ -33,6 +33,6 @@ fun ClientInfoScreen() {
             modifier = Modifier.padding(top = 16.dp, start = 24.dp, end = 24.dp)
         )
 
-        StepperView(initialValue = 0)
+        //StepperView(stepperValue = 0,
     }
 }

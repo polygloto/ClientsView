@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.mikhailovalx.clientsview.R
@@ -29,7 +30,9 @@ fun LabelView(
     text: String,
     title: String? = null,
     @DrawableRes icon: Int? = null,
-    iconTint: Color = TurquoiseColor
+    iconTint: Color = TurquoiseColor,
+    iconHeight: Dp = 10.dp,
+    iconWidth: Dp = 10.dp,
 ) {
     val textStartPadding = if (icon == null) 16.dp else 10.dp
 
@@ -46,7 +49,7 @@ fun LabelView(
 
         Card(
             modifier = Modifier
-                .fillMaxWidth()
+                .height(IntrinsicSize.Min)
                 .defaultMinSize(minHeight = 50.dp)
                 .background(WhiteColor),
             elevation = 4.dp,
@@ -60,14 +63,17 @@ fun LabelView(
                         painter = painterResource(id = icon),
                         tint = iconTint,
                         contentDescription = null,
-                        modifier = Modifier.padding(start = 16.dp, end = 10.dp)
+                        modifier = Modifier
+                            .padding(start = 16.dp, end = 10.dp)
+                            .size(height = iconHeight, width = iconWidth)
                     )
 
                     Divider(
                         color = DividerColor,
                         modifier = Modifier
                             .width(1.dp)
-                            .height(22.dp)
+                            .fillMaxHeight()
+                            .padding(vertical = 14.dp)
                     )
                 }
 
@@ -85,8 +91,6 @@ fun LabelView(
             }
         }
     }
-
-
 }
 
 @Composable
