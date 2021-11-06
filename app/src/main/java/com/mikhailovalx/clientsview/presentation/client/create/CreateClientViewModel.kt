@@ -56,6 +56,6 @@ class CreateClientViewModel @Inject constructor(
 
     private suspend fun handleClientSave(oldState: CreateClientState): CreateClientState {
         saveClientUseCase(params = oldState.client)
-        return oldState.copy(isSaved = true)
+        return oldState
     }
 }

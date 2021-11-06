@@ -19,8 +19,7 @@ sealed class CreateClientEvent : IEvent {
 
 @Immutable
 data class CreateClientState(
-    val client: ClientUi,
-    val isSaved: Boolean
+    val client: ClientUi
 ) : IState {
     companion object {
         val initial = CreateClientState(
@@ -32,8 +31,7 @@ data class CreateClientState(
                 comment = "",
                 skips = 0,
                 isImportant = false
-            ),
-            isSaved = false
+            )
         )
     }
 }

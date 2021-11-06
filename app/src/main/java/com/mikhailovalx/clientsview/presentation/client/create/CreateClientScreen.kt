@@ -53,15 +53,14 @@ fun CreateClientScreen(
     val state by viewModel.state.collectAsState()
     val isEdit = clientId != null
 
-    when {
-        state.isSaved -> navController.popBackStack()
-    }
-
     CreateClientScreenContent(
         client = state.client,
         isEdit = isEdit,
         onBackPressed = { navController.popBackStack() },
-        onSavePressed = { viewModel.sendEvent(CreateClientEvent.OnSaveEvent) },
+        onSavePressed = {
+            viewModel.sendEvent(CreateClientEvent.OnSaveEvent)
+            navController.popBackStack()
+        },
         onIndicatorClick = { viewModel.sendEvent(CreateClientEvent.OnIndicatorClicked) },
         onNameChanged = { viewModel.sendEvent(CreateClientEvent.NameChangedEvent(it)) },
         onPhoneChanged = { viewModel.sendEvent(CreateClientEvent.PhoneChangedEvent(it)) },
