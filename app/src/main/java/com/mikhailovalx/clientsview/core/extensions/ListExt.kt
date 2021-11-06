@@ -1,7 +1,8 @@
 package com.mikhailovalx.clientsview.core.extensions
 
-import com.mikhailovalx.clientsview.core.IConvertible
+import com.mikhailovalx.clientsview.core.IConvertibleTo
+import com.mikhailovalx.clientsview.core.convert
 
-inline fun <reified I : Any, reified O : Any> List<IConvertible<I, O>>.convertAll(): List<O> {
-    return this.map { it.convert<O>() }
+inline fun <reified O : Any> List<IConvertibleTo<O>>.convertAll(): List<O> {
+    return this.mapNotNull { it.convert() }
 }

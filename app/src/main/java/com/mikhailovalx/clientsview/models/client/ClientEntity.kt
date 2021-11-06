@@ -3,7 +3,7 @@ package com.mikhailovalx.clientsview.models.client
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.mikhailovalx.clientsview.core.IConvertible
+import com.mikhailovalx.clientsview.core.IConvertibleTo
 
 @Entity(tableName = "client_table") // TODO Rename table in migration, old name - client_list
 data class ClientEntity(
@@ -21,8 +21,8 @@ data class ClientEntity(
     val birthday: Long,
     @ColumnInfo(name = "COMMENT") // TODO to uppercase
     val comment: String
-) : IConvertible<ClientEntity, ClientUi> {
-    override fun <Input> convert(): ClientUi {
+) : IConvertibleTo<ClientUi> {
+    override fun convertTo(): ClientUi {
         return ClientUi(
             id = id,
             name = name,

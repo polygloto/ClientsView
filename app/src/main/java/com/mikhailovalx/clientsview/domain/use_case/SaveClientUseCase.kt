@@ -10,7 +10,7 @@ class SaveClientUseCase @Inject constructor(
     private val clientRepository: IClientRepository
 ) : ISaveClientUseCase {
     override suspend fun invoke(params: ClientUi) {
-        clientRepository.saveClient(client = params.convert<ClientEntity>())
+        clientRepository.saveClient(client = params.convertTo())
     }
 }
 

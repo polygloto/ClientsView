@@ -1,8 +1,7 @@
 package com.mikhailovalx.clientsview.models.client
 
-import com.mikhailovalx.clientsview.core.IConvertible
+import com.mikhailovalx.clientsview.core.IConvertibleTo
 import com.mikhailovalx.clientsview.core.extensions.toDate
-import com.mikhailovalx.clientsview.models.client.ClientEntity
 
 data class ClientUi(
     val id: Long? = null,
@@ -12,11 +11,11 @@ data class ClientUi(
     val comment: String,
     val skips: Int,
     val isImportant: Boolean
-) : IConvertible<ClientUi, ClientEntity> {
+) : IConvertibleTo<ClientEntity> {
 
     val stringBirthday = if (birthday != Long.MIN_VALUE) birthday.toDate() else ""
 
-    override fun <Input> convert(): ClientEntity {
+    override fun convertTo(): ClientEntity {
         return ClientEntity(
             id = id,
             name = name,
