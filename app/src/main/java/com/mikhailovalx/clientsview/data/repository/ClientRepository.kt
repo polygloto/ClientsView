@@ -2,13 +2,14 @@ package com.mikhailovalx.clientsview.data.repository
 
 import com.mikhailovalx.clientsview.data.local.source.IClientLocalDataSource
 import com.mikhailovalx.clientsview.models.client.ClientEntity
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class ClientRepository @Inject constructor(
     private val localDataSource: IClientLocalDataSource
 ) : IClientRepository {
 
-    override suspend fun getClients(): List<ClientEntity> {
+    override fun getClients(): Flow<List<ClientEntity>> {
         return localDataSource.getClients()
     }
 
@@ -18,6 +19,6 @@ class ClientRepository @Inject constructor(
 }
 
 interface IClientRepository {
-    suspend fun getClients(): List<ClientEntity>
+    fun getClients(): Flow<List<ClientEntity>>
     suspend fun saveClient(client: ClientEntity)
 }

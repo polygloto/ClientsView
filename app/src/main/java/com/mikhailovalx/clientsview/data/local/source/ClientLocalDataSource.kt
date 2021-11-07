@@ -2,12 +2,14 @@ package com.mikhailovalx.clientsview.data.local.source
 
 import com.mikhailovalx.clientsview.data.local.database.dao.IClientDao
 import com.mikhailovalx.clientsview.models.client.ClientEntity
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class ClientLocalDataSource @Inject constructor(
     private val clientDao: IClientDao
 ) : IClientLocalDataSource {
-    override suspend fun getClients(): List<ClientEntity> {
+
+    override fun getClients(): Flow<List<ClientEntity>> {
         return clientDao.getClients()
     }
 
@@ -17,6 +19,6 @@ class ClientLocalDataSource @Inject constructor(
 }
 
 interface IClientLocalDataSource {
-    suspend fun getClients(): List<ClientEntity>
+    fun getClients(): Flow<List<ClientEntity>>
     suspend fun saveClient(client: ClientEntity)
 }

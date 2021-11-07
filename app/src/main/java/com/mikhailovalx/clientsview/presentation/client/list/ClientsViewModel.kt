@@ -3,7 +3,9 @@ package com.mikhailovalx.clientsview.presentation.client.list
 import androidx.lifecycle.viewModelScope
 import com.mikhailovalx.clientsview.core.base.BaseViewModel
 import com.mikhailovalx.clientsview.domain.use_case.IGetClientsUseCase
+import com.mikhailovalx.clientsview.models.client.ClientUi
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -17,7 +19,7 @@ class ClientsViewModel @Inject constructor(
     override fun reduce(oldState: ClientsScreenState, event: ClientsScreenEvent) {
         viewModelScope.launch {
             val newState = when (event) {
-                is ClientsScreenEvent.FetchEvent -> handleFetchEvent()
+                is ClientsScreenEvent.FetchEvent -> handleFetchEvent(event.clients)
                 is ClientsScreenEvent.OnClientClickEvent -> handleOnClientClickEvent(oldState)
             }
             setState(newState)
@@ -25,8 +27,14 @@ class ClientsViewModel @Inject constructor(
     }
 
     init {
+        collectClients()
+    }
+
+    private fun collectClients() {
         viewModelScope.launch {
-            sendEvent(ClientsScreenEvent.FetchEvent)
+            getClientsUseCase().collect {
+                sendEvent(ClientsScreenEvent.FetchEvent(it))
+            }
         }
     }
 
@@ -34,8 +42,7 @@ class ClientsViewModel @Inject constructor(
         return oldState
     }
 
-    private suspend fun handleFetchEvent(): ClientsScreenState {
-        val clients = getClientsUseCase()
+    private fun handleFetchEvent(clients: List<ClientUi>): ClientsScreenState {
         return ClientsScreenState(clients)
     }
 }

@@ -32,7 +32,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.mikhailovalx.clientsview.R
 import com.mikhailovalx.clientsview.core.extensions.showDatePicker
-import com.mikhailovalx.clientsview.core.extensions.toDate
 import com.mikhailovalx.clientsview.models.client.ClientUi
 import com.mikhailovalx.clientsview.presentation.PresentationMocks
 import com.mikhailovalx.clientsview.presentation.common.IndicatorView

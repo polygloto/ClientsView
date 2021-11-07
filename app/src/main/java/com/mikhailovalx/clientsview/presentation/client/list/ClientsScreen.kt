@@ -17,24 +17,24 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import com.mikhailovalx.clientsview.R
 import com.mikhailovalx.clientsview.models.client.ClientUi
 import com.mikhailovalx.clientsview.presentation.PresentationMocks
 import com.mikhailovalx.clientsview.presentation.common.IndicatorView
-import com.mikhailovalx.clientsview.theme.*
+import com.mikhailovalx.clientsview.theme.PrimaryTextColor
+import com.mikhailovalx.clientsview.theme.SecondaryColor
+import com.mikhailovalx.clientsview.theme.TurquoiseColor
 
 @Composable
 fun ClientsScreen(
     viewModel: ClientsViewModel
 ) {
     val state by viewModel.state.collectAsState()
-    when {
-        state.clients.isNotEmpty() -> ClientsScreenContent(
-            clients = state.clients,
-            onClientClick = { viewModel.sendEvent(ClientsScreenEvent.OnClientClickEvent) }
-        )
-    }
+
+    ClientsScreenContent(
+        clients = state.clients,
+        onClientClick = { viewModel.sendEvent(ClientsScreenEvent.OnClientClickEvent) }
+    )
 }
 
 @Composable
