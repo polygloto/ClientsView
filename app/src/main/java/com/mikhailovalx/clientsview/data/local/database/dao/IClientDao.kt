@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface IClientDao {
-    @Query("SELECT * FROM client_table")
+    @Query("SELECT * FROM client_table ORDER BY NAME")
     fun getClients(): Flow<List<ClientEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

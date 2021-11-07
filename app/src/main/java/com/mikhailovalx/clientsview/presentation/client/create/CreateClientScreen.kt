@@ -11,19 +11,18 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -43,6 +42,7 @@ import com.mikhailovalx.clientsview.theme.PrimaryTextColor
 import com.mikhailovalx.clientsview.theme.SecondaryColor
 import com.mikhailovalx.clientsview.theme.WhiteColor
 
+@ExperimentalComposeUiApi
 @Composable
 fun CreateClientScreen(
     viewModel: CreateClientViewModel,
@@ -51,12 +51,17 @@ fun CreateClientScreen(
 ) {
     val state by viewModel.state.collectAsState()
     val isEdit = clientId != null
+    val keyboardController = LocalSoftwareKeyboardController.current
 
     CreateClientScreenContent(
         client = state.client,
         isEdit = isEdit,
-        onBackPressed = { navController.popBackStack() },
+        onBackPressed = {
+            keyboardController?.hide()
+            navController.popBackStack()
+        },
         onSavePressed = {
+            keyboardController?.hide()
             viewModel.sendEvent(CreateClientEvent.OnSaveEvent)
             navController.popBackStack()
         },
@@ -95,30 +100,30 @@ fun CreateClientScreenContent(
         stringResource(id = R.string.create_client_title)
     }
 
-    Column(
+    Scaffold(
         modifier = Modifier
             .fillMaxSize()
             .background(WhiteColor),
-    ) {
-        TopAppBar(
-            title = { Text(text = appBarTitle, fontSize = 18.sp) },
-            contentColor = PrimaryTextColor,
-            backgroundColor = WhiteColor,
-            navigationIcon = {
-                IconButton(onClick = { onBackPressed() }) {
-                    Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = null)
+        topBar = {
+            TopAppBar(
+                title = { Text(text = appBarTitle, fontSize = 18.sp) },
+                contentColor = PrimaryTextColor,
+                backgroundColor = WhiteColor,
+                navigationIcon = {
+                    IconButton(onClick = { onBackPressed() }) {
+                        Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = null)
+                    }
+                },
+                actions = {
+                    IconButton(onClick = onSavePressed) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_check),
+                            contentDescription = null
+                        )
+                    }
                 }
-            },
-            actions = {
-                IconButton(onClick = onSavePressed) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_check),
-                        contentDescription = null
-                    )
-                }
-            }
-        )
-
+            )
+        }) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
