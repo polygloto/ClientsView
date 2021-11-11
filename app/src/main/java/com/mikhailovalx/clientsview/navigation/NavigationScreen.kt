@@ -13,11 +13,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.mikhailovalx.clientsview.SettingsScreen
+import com.mikhailovalx.clientsview.core.extensions.open
 import com.mikhailovalx.clientsview.presentation.calendar.CalendarScreen
 import com.mikhailovalx.clientsview.presentation.client.list.ClientsScreen
 import com.mikhailovalx.clientsview.presentation.common.BottomNavigationBar
 import com.mikhailovalx.clientsview.presentation.finance.FinanceScreen
-import com.mikhailovalx.clientsview.theme.TurquoiseColor
+import com.mikhailovalx.clientsview.theme.PrimaryColor
 import com.mikhailovalx.clientsview.theme.WhiteColor
 
 @Composable
@@ -29,7 +30,7 @@ fun NavigationScreen(
         bottomBar = { BottomNavigationBar(navController) },
         floatingActionButton = {
             FloatingActionButton(
-                backgroundColor = TurquoiseColor,
+                backgroundColor = PrimaryColor,
                 onClick = { navHostController.open(ScreenRoutes.CreateEditClient) }
             ) {
                 Icon(imageVector = Icons.Rounded.Add, contentDescription = "", tint = WhiteColor)
@@ -39,7 +40,9 @@ fun NavigationScreen(
         isFloatingActionButtonDocked = true
     ) {
         NavHost(navController, startDestination = BottomNavigationItem.Clients.route) {
-            composable(BottomNavigationItem.Clients.route) { ClientsScreen(hiltViewModel()) }
+            composable(BottomNavigationItem.Clients.route) {
+                ClientsScreen(navController = navHostController, viewModel = hiltViewModel())
+            }
             composable(BottomNavigationItem.Calendar.route) { CalendarScreen() }
             composable(BottomNavigationItem.Finance.route) { FinanceScreen() }
             composable(BottomNavigationItem.Settings.route) { SettingsScreen() }

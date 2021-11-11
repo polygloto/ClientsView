@@ -11,7 +11,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.mikhailovalx.clientsview.theme.TurquoiseColor
+import com.mikhailovalx.clientsview.theme.PrimaryColor
 
 @Composable
 fun CircleView(
@@ -54,7 +54,7 @@ fun SemiCircleView(
 @Composable
 fun Shapes_Preview() {
     Column {
-        CircleView(color = TurquoiseColor, size = 50.dp)
-        SemiCircleView(color = TurquoiseColor, size = 50.dp)
+        CircleView(color = PrimaryColor, size = 50.dp)
+        SemiCircleView(color = PrimaryColor, size = 50.dp)
     }
 }

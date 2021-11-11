@@ -4,7 +4,7 @@ import com.mikhailovalx.clientsview.core.IScreen
 
 sealed class ScreenRoutes(
     override val route: String
-): IScreen {
+) : IScreen {
     object Main : ScreenRoutes(route = ScreenNames.MAIN)
     object ClientInfo : ScreenRoutes(route = ScreenNames.CLIENT_INFO)
     object CreateEditClient : ScreenRoutes(route = ScreenNames.CLIENT_CREATE_EDIT)

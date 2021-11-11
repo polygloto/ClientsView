@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.sp
 import com.mikhailovalx.clientsview.R
 import com.mikhailovalx.clientsview.theme.DividerColor
 import com.mikhailovalx.clientsview.theme.LabelTextColor
-import com.mikhailovalx.clientsview.theme.TurquoiseColor
+import com.mikhailovalx.clientsview.theme.PrimaryColor
 import com.mikhailovalx.clientsview.theme.WhiteColor
 
 @Composable
@@ -30,7 +30,7 @@ fun LabelView(
     text: String,
     title: String? = null,
     @DrawableRes icon: Int? = null,
-    iconTint: Color = TurquoiseColor,
+    iconTint: Color = PrimaryColor,
     iconHeight: Dp = 10.dp,
     iconWidth: Dp = 10.dp,
 ) {

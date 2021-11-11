@@ -12,9 +12,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.mikhailovalx.clientsview.R
-import com.mikhailovalx.clientsview.theme.GreenAccentColor
+import com.mikhailovalx.clientsview.theme.AccentColor
 import com.mikhailovalx.clientsview.theme.IndicatorIconColor
-import com.mikhailovalx.clientsview.theme.TurquoiseColor
+import com.mikhailovalx.clientsview.theme.PrimaryColor
 import com.mikhailovalx.clientsview.theme.WhiteColor
 
 @Composable
@@ -26,8 +26,8 @@ fun IndicatorView(
     frontCircleSize: Dp = 38.dp,
     iconHeight: Dp = 13.dp,
     iconWidth: Dp = 14.dp,
-    indicatorOnColor: Color = GreenAccentColor,
-    indicatorOffColor: Color = TurquoiseColor,
+    indicatorOnColor: Color = AccentColor,
+    indicatorOffColor: Color = PrimaryColor,
 ) {
     val indicatorColor = if (isImportant) indicatorOnColor else indicatorOffColor
     val iconId = if (isImportant) R.drawable.ic_heart_green else R.drawable.ic_heart

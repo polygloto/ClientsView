@@ -20,7 +20,6 @@ class ClientsViewModel @Inject constructor(
         viewModelScope.launch {
             val newState = when (event) {
                 is ClientsScreenEvent.FetchEvent -> handleFetchEvent(event.clients)
-                is ClientsScreenEvent.OnClientClickEvent -> handleOnClientClickEvent(oldState)
             }
             setState(newState)
         }
@@ -36,10 +35,6 @@ class ClientsViewModel @Inject constructor(
                 sendEvent(ClientsScreenEvent.FetchEvent(it))
             }
         }
-    }
-
-    private fun handleOnClientClickEvent(oldState: ClientsScreenState): ClientsScreenState {
-        return oldState
     }
 
     private fun handleFetchEvent(clients: List<ClientUi>): ClientsScreenState {

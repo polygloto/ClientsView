@@ -17,30 +17,36 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.mikhailovalx.clientsview.R
+import com.mikhailovalx.clientsview.core.extensions.openWith
 import com.mikhailovalx.clientsview.models.client.ClientUi
+import com.mikhailovalx.clientsview.navigation.ScreenRoutes
 import com.mikhailovalx.clientsview.presentation.PresentationMocks
 import com.mikhailovalx.clientsview.presentation.common.IndicatorView
+import com.mikhailovalx.clientsview.theme.LabelIconsColor
+import com.mikhailovalx.clientsview.theme.PrimaryColor
 import com.mikhailovalx.clientsview.theme.PrimaryTextColor
-import com.mikhailovalx.clientsview.theme.SecondaryColor
-import com.mikhailovalx.clientsview.theme.TurquoiseColor
 
 @Composable
 fun ClientsScreen(
+    navController: NavController,
     viewModel: ClientsViewModel
 ) {
     val state by viewModel.state.collectAsState()
 
     ClientsScreenContent(
         clients = state.clients,
-        onClientClick = { viewModel.sendEvent(ClientsScreenEvent.OnClientClickEvent) }
+        onClientClick = {
+            navController.openWith(screen = ScreenRoutes.ClientInfo, param = it)
+        }
     )
 }
 
 @Composable
 fun ClientsScreenContent(
     clients: List<ClientUi>,
-    onClientClick: () -> Unit,
+    onClientClick: (Long) -> Unit,
 ) {
     LazyColumn {
         items(clients) { client ->
@@ -58,11 +64,11 @@ fun ClientsScreenContent(
 @Composable
 fun ClientCard(
     client: ClientUi,
-    onClientClick: () -> Unit
+    onClientClick: (Long) -> Unit
 ) {
     Box(
         modifier = Modifier
-            .clickable { onClientClick() }
+            .clickable { client.id?.let { onClientClick(it) } }
             .padding(horizontal = 24.dp, vertical = 6.dp)
     ) {
         Card(
@@ -84,7 +90,7 @@ fun ClientCard(
 
         Icon(
             painter = painterResource(id = R.drawable.ic_arrow_right),
-            tint = TurquoiseColor,
+            tint = PrimaryColor,
             contentDescription = null,
             modifier = Modifier
                 .align(Alignment.CenterEnd)
@@ -109,7 +115,7 @@ fun ClientCardText(name: String, phone: String) {
 
         Text(
             text = phone,
-            color = SecondaryColor,
+            color = LabelIconsColor,
             fontSize = 12.sp
         )
     }

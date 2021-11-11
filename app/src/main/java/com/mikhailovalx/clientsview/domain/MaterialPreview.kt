@@ -25,7 +25,7 @@ import be.sigmadelta.calpose.model.CalposeDate
 import be.sigmadelta.calpose.model.CalposeWidgets
 import be.sigmadelta.calpose.widgets.DefaultDay
 import be.sigmadelta.calpose.widgets.MaterialHeader
-import com.mikhailovalx.clientsview.theme.TurquoiseColor
+import com.mikhailovalx.clientsview.theme.PrimaryColor
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.YearMonth
 import soup.compose.material.motion.Axis
@@ -61,7 +61,7 @@ fun MaterialCalendar(
 
         widgets = CalposeWidgets(
             header = { month, todayMonth, actions ->
-                MaterialHeader(month, todayMonth, actions, TurquoiseColor)
+                MaterialHeader(month, todayMonth, actions, PrimaryColor)
             },
             headerDayRow = { headerDayList -> HeaderDayRow(headerDayList = headerDayList) },
             day = { dayDate, todayDate ->
@@ -119,7 +119,7 @@ fun MaterialCalendarMotion(
                     month = month,
                     todayMonth = todayMonth,
                     actions = actions,
-                    backgroundColor = TurquoiseColor,
+                    backgroundColor = PrimaryColor,
                     titleContainer = {
                         MaterialSharedAxis(
                             targetState = month,
@@ -182,7 +182,7 @@ fun RowScope.Day(
 ) {
     val isSelected = selectionSet.contains(dayDate)
     val weight = if (isSelected) 1f else WEIGHT_7DAY_WEEK
-    val bgColor = if (isSelected) TurquoiseColor else Color.Transparent
+    val bgColor = if (isSelected) PrimaryColor else Color.Transparent
 
     val widget: @Composable () -> Unit = {
         DefaultDay(

@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.mikhailovalx.clientsview.R
 import com.mikhailovalx.clientsview.theme.LabelTextColor
-import com.mikhailovalx.clientsview.theme.TurquoiseColor
+import com.mikhailovalx.clientsview.theme.PrimaryColor
 import com.mikhailovalx.clientsview.theme.WhiteColor
 
 @Composable
@@ -83,7 +83,7 @@ fun StepPrevious(
         modifier = modifier,
         contentAlignment = Alignment.Center
     ) {
-        CircleView(size = 16.dp, color = TurquoiseColor)
+        CircleView(size = 16.dp, color = PrimaryColor)
 
         Icon(
             modifier = Modifier.size(8.dp),
@@ -102,7 +102,7 @@ fun StepNext(
         modifier = modifier,
         contentAlignment = Alignment.Center
     ) {
-        CircleView(size = 16.dp, color = TurquoiseColor)
+        CircleView(size = 16.dp, color = PrimaryColor)
 
         Icon(
             modifier = Modifier.size(8.dp),

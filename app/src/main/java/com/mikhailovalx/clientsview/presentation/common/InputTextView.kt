@@ -30,7 +30,7 @@ fun InputTextView(
     textValue: String,
     @DrawableRes icon: Int? = null,
     onValueChange: (String) -> Unit,
-    iconTint: Color = TurquoiseColor,
+    iconTint: Color = PrimaryColor,
     iconHeight: Dp = 10.dp,
     iconWidth: Dp = 10.dp,
     minHeight: Dp = 54.dp
@@ -84,7 +84,7 @@ fun InputTextView(
                         .fillMaxWidth(),
                     value = textValue,
                     onValueChange = onValueChange,
-                    cursorBrush = SolidColor(TurquoiseColor),
+                    cursorBrush = SolidColor(PrimaryColor),
                 )
             }
         }
@@ -97,7 +97,7 @@ fun InputTextView_Preview() {
     InputTextView(
         icon = R.drawable.ic_person,
         title = "Имя клиента",
-        iconTint = SecondaryColor,
+        iconTint = LabelIconsColor,
         textValue = "",
         onValueChange = { }
     )

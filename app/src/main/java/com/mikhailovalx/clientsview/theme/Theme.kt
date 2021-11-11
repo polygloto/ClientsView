@@ -11,8 +11,8 @@ private val DarkColorPalette = darkColors(
 )
 
 private val LightColorPalette = lightColors(
-    primary = TurquoiseColor, // cursors
-    secondary = GreenAccentColor, // ???
+    primary = PrimaryColor, // cursors
+    secondary = AccentColor, // ???
     surface = WhiteColor,
 )
 

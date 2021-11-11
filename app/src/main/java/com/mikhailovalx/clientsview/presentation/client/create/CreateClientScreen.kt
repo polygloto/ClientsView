@@ -11,9 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -23,23 +21,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.mikhailovalx.clientsview.R
 import com.mikhailovalx.clientsview.core.extensions.showDatePicker
 import com.mikhailovalx.clientsview.models.client.ClientUi
 import com.mikhailovalx.clientsview.presentation.PresentationMocks
-import com.mikhailovalx.clientsview.presentation.common.IndicatorView
-import com.mikhailovalx.clientsview.presentation.common.InputTextView
-import com.mikhailovalx.clientsview.presentation.common.LabelView
-import com.mikhailovalx.clientsview.presentation.common.StepperView
+import com.mikhailovalx.clientsview.presentation.common.*
 import com.mikhailovalx.clientsview.theme.IndicatorColor
-import com.mikhailovalx.clientsview.theme.PrimaryTextColor
-import com.mikhailovalx.clientsview.theme.SecondaryColor
+import com.mikhailovalx.clientsview.theme.LabelIconsColor
 import com.mikhailovalx.clientsview.theme.WhiteColor
 
 @ExperimentalComposeUiApi
@@ -105,25 +97,15 @@ fun CreateClientScreenContent(
             .fillMaxSize()
             .background(WhiteColor),
         topBar = {
-            TopAppBar(
-                title = { Text(text = appBarTitle, fontSize = 18.sp) },
-                contentColor = PrimaryTextColor,
-                backgroundColor = WhiteColor,
-                navigationIcon = {
-                    IconButton(onClick = { onBackPressed() }) {
-                        Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = null)
-                    }
-                },
+            AppBar(
+                title = appBarTitle,
+                onBackPressed = onBackPressed,
                 actions = {
-                    IconButton(onClick = onSavePressed) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.ic_check),
-                            contentDescription = null
-                        )
-                    }
+                    ActionButtonView(onClick = onSavePressed, iconId = R.drawable.ic_check)
                 }
             )
-        }) {
+        }
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -149,7 +131,7 @@ fun CreateClientScreenContent(
                 onValueChange = onNameChanged,
                 icon = R.drawable.ic_person,
                 title = stringResource(id = R.string.name),
-                iconTint = SecondaryColor
+                iconTint = LabelIconsColor
             )
 
             InputTextView(
@@ -158,7 +140,7 @@ fun CreateClientScreenContent(
                 textValue = client.phone,
                 onValueChange = onPhoneChanged,
                 title = stringResource(id = R.string.phone),
-                iconTint = SecondaryColor,
+                iconTint = LabelIconsColor,
                 iconHeight = 11.dp,
                 iconWidth = 11.dp
             )
@@ -171,7 +153,7 @@ fun CreateClientScreenContent(
                     },
                 icon = R.drawable.ic_calendar_check,
                 title = stringResource(id = R.string.birthday),
-                iconTint = SecondaryColor,
+                iconTint = LabelIconsColor,
                 iconHeight = 11.dp,
                 iconWidth = 11.dp,
                 text = client.stringBirthday
@@ -184,7 +166,7 @@ fun CreateClientScreenContent(
                 textValue = client.comment,
                 onValueChange = onCommentChanged,
                 icon = R.drawable.ic_comment,
-                iconTint = SecondaryColor,
+                iconTint = LabelIconsColor,
                 iconHeight = 12.dp,
                 iconWidth = 12.dp
             )
