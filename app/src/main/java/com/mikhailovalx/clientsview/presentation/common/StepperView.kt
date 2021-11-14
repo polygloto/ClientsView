@@ -1,5 +1,6 @@
 package com.mikhailovalx.clientsview.presentation.common
 
+import androidx.compose.animation.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -21,6 +22,7 @@ import com.mikhailovalx.clientsview.theme.LabelTextColor
 import com.mikhailovalx.clientsview.theme.PrimaryColor
 import com.mikhailovalx.clientsview.theme.WhiteColor
 
+@ExperimentalAnimationApi
 @Composable
 fun StepperView(
     modifier: Modifier = Modifier,
@@ -28,9 +30,8 @@ fun StepperView(
     onValueChange: (Int) -> Unit,
     stepperValue: Int = 0,
     height: Dp = 54.dp,
-    width: Dp = 128.dp,
+    width: Dp = 128.dp
 ) {
-
     Column(modifier = modifier) {
         if (title != null) {
             Text(
@@ -59,16 +60,41 @@ fun StepperView(
                     modifier = Modifier
                         .fillMaxHeight()
                         .width(50.dp)
-                        .clickable { if (stepperValue != 0) { onValueChange(stepperValue.dec()) } }
+                        .clickable {
+                            if (stepperValue != 0) {
+                                onValueChange(stepperValue.dec())
+                            }
+                        }
                 )
 
-                Text(text = stepperValue.toString())
+                AnimatedContent(
+                    targetState = stepperValue,
+                    transitionSpec = {
+                        // Compare the incoming number with the previous number.
+                        if (targetState > initialState) {
+                            // If the target number is larger, it slides up and fades in
+                            // while the initial (smaller) number slides up and fades out.
+                            slideInVertically { height -> height } + fadeIn() with
+                                    slideOutVertically { height -> -height } + fadeOut()
+                        } else {
+                            // If the target number is smaller, it slides down and fades in
+                            // while the initial number slides down and fades out.
+                            slideInVertically { height -> -height } + fadeIn() with
+                                    slideOutVertically { height -> height } + fadeOut()
+                        }.using(
+                            // Disable clipping since the faded slide-in/out should
+                            // be displayed out of bounds.
+                            SizeTransform(clip = false)
+                        )
+                    }
+                ) { targetCount ->
+                    Text(text = "$targetCount")
+                }
 
-                StepNext(
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .width(50.dp)
-                        .clickable { onValueChange(stepperValue.inc()) }
+                StepNext(modifier = Modifier
+                    .fillMaxHeight()
+                    .width(50.dp)
+                    .clickable { onValueChange(stepperValue.inc()) }
                 )
             }
         }
@@ -77,7 +103,7 @@ fun StepperView(
 
 @Composable
 fun StepPrevious(
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier
 ) {
     Box(
         modifier = modifier,
@@ -96,7 +122,7 @@ fun StepPrevious(
 
 @Composable
 fun StepNext(
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier
 ) {
     Box(
         modifier = modifier,
@@ -113,6 +139,7 @@ fun StepNext(
     }
 }
 
+@ExperimentalAnimationApi
 @Composable
 @Preview
 fun StepperView_Preview() {

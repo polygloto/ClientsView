@@ -16,9 +16,14 @@ class ClientRepository @Inject constructor(
     override suspend fun saveClient(client: ClientEntity) {
         localDataSource.saveClient(client)
     }
+
+    override fun getClientById(clientId: Long): Flow<ClientEntity> {
+        return localDataSource.getClientById(clientId)
+    }
 }
 
 interface IClientRepository {
     fun getClients(): Flow<List<ClientEntity>>
     suspend fun saveClient(client: ClientEntity)
+    fun getClientById(clientId: Long): Flow<ClientEntity>
 }

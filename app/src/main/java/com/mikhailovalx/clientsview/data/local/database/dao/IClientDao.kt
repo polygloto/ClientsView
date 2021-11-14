@@ -9,6 +9,9 @@ interface IClientDao {
     @Query("SELECT * FROM client_table ORDER BY NAME")
     fun getClients(): Flow<List<ClientEntity>>
 
+    @Query("SELECT * FROM client_table WHERE ID = :clientId")
+    fun getClientById(clientId: Long): Flow<ClientEntity>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(client: ClientEntity)
 

@@ -1,9 +1,6 @@
 package com.mikhailovalx.clientsview.di
 
-import com.mikhailovalx.clientsview.domain.use_case.GetClientsUseCase
-import com.mikhailovalx.clientsview.domain.use_case.IGetClientsUseCase
-import com.mikhailovalx.clientsview.domain.use_case.ISaveClientUseCase
-import com.mikhailovalx.clientsview.domain.use_case.SaveClientUseCase
+import com.mikhailovalx.clientsview.domain.use_case.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -21,4 +18,8 @@ interface UseCaseModule {
     @Binds
     @ViewModelScoped
     fun bindSaveClientUseCase(saveClientUseCase: SaveClientUseCase): ISaveClientUseCase
+
+    @Binds
+    @ViewModelScoped
+    fun bindGetClientByIdUseCase(getClientByIdUseCase: GetClientByIdUseCase): IGetClientByIdUseCase
 }

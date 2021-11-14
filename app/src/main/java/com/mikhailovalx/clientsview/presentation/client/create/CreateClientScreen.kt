@@ -1,6 +1,7 @@
 package com.mikhailovalx.clientsview.presentation.client.create
 
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -34,6 +35,7 @@ import com.mikhailovalx.clientsview.theme.IndicatorColor
 import com.mikhailovalx.clientsview.theme.LabelIconsColor
 import com.mikhailovalx.clientsview.theme.WhiteColor
 
+@ExperimentalAnimationApi
 @ExperimentalComposeUiApi
 @Composable
 fun CreateClientScreen(
@@ -66,6 +68,7 @@ fun CreateClientScreen(
     )
 }
 
+@ExperimentalAnimationApi
 @Composable
 fun CreateClientScreenContent(
     client: ClientUi,
@@ -187,6 +190,7 @@ fun CreateClientScreenContent(
     }
 }
 
+@ExperimentalAnimationApi
 @Preview
 @Composable
 fun CreateClientScreen_Preview() {

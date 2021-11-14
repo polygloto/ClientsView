@@ -1,5 +1,6 @@
 package com.mikhailovalx.clientsview.presentation.main
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Surface
@@ -21,6 +22,7 @@ import com.mikhailovalx.clientsview.presentation.client.create.CreateClientScree
 import com.mikhailovalx.clientsview.presentation.client.info.ClientInfoScreen
 import com.mikhailovalx.clientsview.theme.MainTheme
 
+@ExperimentalAnimationApi
 @ExperimentalComposeUiApi
 @Composable
 fun MainScreen() {
@@ -44,7 +46,11 @@ fun MainScreen() {
                         arguments = listOf(navArgument(CLIENT_ID_ARG) { type = NavType.LongType })
                     ) { backStackEntry ->
                         backStackEntry.arguments?.getLong(CLIENT_ID_ARG)?.let { clientId ->
-                            ClientInfoScreen(clientId = clientId, navController = navController)
+                            ClientInfoScreen(
+                                clientId = clientId,
+                                navController = navController,
+                                viewModel = hiltViewModel()
+                            )
                         }
                     }
 
@@ -62,6 +68,7 @@ fun MainScreen() {
     }
 }
 
+@ExperimentalAnimationApi
 @ExperimentalComposeUiApi
 @Preview(showBackground = true)
 @Composable

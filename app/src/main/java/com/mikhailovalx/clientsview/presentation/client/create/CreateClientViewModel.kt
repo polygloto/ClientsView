@@ -2,7 +2,6 @@ package com.mikhailovalx.clientsview.presentation.client.create
 
 import com.mikhailovalx.clientsview.core.base.BaseViewModel
 import com.mikhailovalx.clientsview.domain.use_case.ISaveClientUseCase
-import com.mikhailovalx.clientsview.domain.use_case.SaveClientUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -10,7 +9,7 @@ import javax.inject.Inject
 @HiltViewModel
 class CreateClientViewModel @Inject constructor(
     private val saveClientUseCase: ISaveClientUseCase
-) : BaseViewModel<CreateClientState, CreateClientEvent>(){
+) : BaseViewModel<CreateClientState, CreateClientEvent>() {
     override val initialState: CreateClientState = CreateClientState.initial
 
     override fun reduce(oldState: CreateClientState, event: CreateClientEvent) {

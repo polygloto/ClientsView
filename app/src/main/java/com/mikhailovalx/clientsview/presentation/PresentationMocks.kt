@@ -9,7 +9,6 @@ object PresentationMocks {
         isImportant = true,
         birthday = 0L,
         comment = "222",
-        skips = 2,
-
+        skips = 2
     )
 }

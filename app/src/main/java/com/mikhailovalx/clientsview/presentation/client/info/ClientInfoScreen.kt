@@ -1,43 +1,58 @@
 package com.mikhailovalx.clientsview.presentation.client.info
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.mikhailovalx.clientsview.R
-import com.mikhailovalx.clientsview.presentation.common.ActionButtonView
-import com.mikhailovalx.clientsview.presentation.common.AppBar
-import com.mikhailovalx.clientsview.presentation.common.LabelView
+import com.mikhailovalx.clientsview.core.extensions.toStringDate
+import com.mikhailovalx.clientsview.models.client.ClientUi
+import com.mikhailovalx.clientsview.presentation.PresentationMocks
+import com.mikhailovalx.clientsview.presentation.common.*
+import com.mikhailovalx.clientsview.theme.IndicatorColor
+import com.mikhailovalx.clientsview.theme.PrimaryColor
 
 @Composable
 fun ClientInfoScreen(
+    viewModel: ClientInfoViewModel,
     clientId: Long,
     navController: NavController
 ) {
-    val title = stringResource(id = R.string.client_info_title)
+    viewModel.sendEvent(ClientInfoEvent.FetchEvent(clientId))
+    val state by viewModel.state.collectAsState()
+
     ClientInfoScreenContent(
-        title = "id = $clientId",
-        onBackPressed = { navController.popBackStack() }
+        onBackPressed = { navController.popBackStack() },
+        client = state.client
     )
 }
 
 
 @Composable
 fun ClientInfoScreenContent(
-    title: String,
+    client: ClientUi,
     onBackPressed: () -> Unit
 ) {
 
+    val scrollState = rememberScrollState()
 
     Scaffold(
         topBar = {
             AppBar(
-                title = title,
+                title = stringResource(id = R.string.client_info_title),
                 onBackPressed = onBackPressed,
                 actions = {
                     ActionButtonView(onClick = { }, iconId = R.drawable.ic_delete)
@@ -46,29 +61,86 @@ fun ClientInfoScreenContent(
             )
         }
     ) {
-        Column {
+        Column(
+            modifier = Modifier.verticalScroll(scrollState),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Row(
+                modifier = Modifier
+                    .padding(top = 30.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                RoundedButtonView(
+                    modifier = Modifier
+                        .padding(end = 24.dp)
+                        .clickable { },
+                    iconId = R.drawable.ic_fast_message
+                )
+
+                IndicatorView(
+                    iconWidth = 22.dp,
+                    iconHeight = 20.dp,
+                    backCircleSize = 90.dp,
+                    frontCircleSize = 64.dp,
+                    indicatorOffColor = IndicatorColor
+                )
+
+                RoundedButtonView(
+                    modifier = Modifier
+                        .padding(start = 24.dp)
+                        .clickable { },
+                    iconId = R.drawable.ic_fast_call
+                )
+            }
+
             LabelView(
                 icon = R.drawable.ic_person,
-                text = "",
-                title = "Имя клиента",
-                modifier = Modifier.padding(top = 16.dp, start = 24.dp, end = 24.dp)
+                text = client.name,
+                title = stringResource(id = R.string.name),
+                modifier = Modifier.padding(top = 28.dp, start = 16.dp, end = 16.dp)
             )
 
             LabelView(
                 icon = R.drawable.ic_calendar_check,
-                text = "",
-                title = "Дата рождения",
-                modifier = Modifier.padding(top = 16.dp, start = 24.dp, end = 24.dp)
+                text = client.birthday.toStringDate(),
+                title = stringResource(id = R.string.birthday),
+                modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp)
             )
 
             LabelView(
                 icon = R.drawable.ic_phone,
-                text = "",
-                title = "Номер телефона",
-                modifier = Modifier.padding(top = 16.dp, start = 24.dp, end = 24.dp)
+                text = client.phone,
+                title = stringResource(id = R.string.phone),
+                modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp)
             )
 
-            //StepperView(stepperValue = 0,
+            Row(
+                modifier = Modifier
+                    .padding(top = 16.dp, start = 16.dp, end = 16.dp)
+                    .fillMaxWidth()
+            ) {
+                NumberView(
+                    title = stringResource(id = R.string.count_of_visits),
+                    number = 10 // TODO
+                )
+
+                NumberView(
+                    modifier = Modifier.padding(start = 48.dp),
+                    title = stringResource(id = R.string.count_of_skips),
+                    number = client.skips
+                )
+            }
+
+            LabelView(
+                modifier = Modifier
+                    .padding(16.dp),
+                title = stringResource(id = R.string.comment),
+                text = client.comment,
+                icon = R.drawable.ic_comment,
+                iconTint = PrimaryColor,
+                iconHeight = 12.dp,
+                iconWidth = 12.dp
+            )
         }
     }
 }
@@ -77,7 +149,7 @@ fun ClientInfoScreenContent(
 @Composable
 fun ClientInfoScreen_Preview() {
     ClientInfoScreenContent(
-        title = "Клиент",
-        onBackPressed = { }
+        onBackPressed = { },
+        client = PresentationMocks.client
     )
 }

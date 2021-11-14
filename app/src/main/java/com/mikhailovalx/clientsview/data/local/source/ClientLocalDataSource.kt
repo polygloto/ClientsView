@@ -16,9 +16,14 @@ class ClientLocalDataSource @Inject constructor(
     override suspend fun saveClient(client: ClientEntity) {
         clientDao.insert(client)
     }
+
+    override fun getClientById(clientId: Long): Flow<ClientEntity> {
+        return clientDao.getClientById(clientId)
+    }
 }
 
 interface IClientLocalDataSource {
     fun getClients(): Flow<List<ClientEntity>>
     suspend fun saveClient(client: ClientEntity)
+    fun getClientById(clientId: Long): Flow<ClientEntity>
 }

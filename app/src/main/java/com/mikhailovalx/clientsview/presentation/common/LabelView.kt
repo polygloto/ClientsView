@@ -2,6 +2,7 @@ package com.mikhailovalx.clientsview.presentation.common
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -14,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -33,6 +35,7 @@ fun LabelView(
     iconTint: Color = PrimaryColor,
     iconHeight: Dp = 10.dp,
     iconWidth: Dp = 10.dp,
+    minHeight: Dp = 54.dp
 ) {
     val textStartPadding = if (icon == null) 16.dp else 10.dp
 
@@ -49,8 +52,8 @@ fun LabelView(
 
         Card(
             modifier = Modifier
+                .defaultMinSize(minHeight = minHeight)
                 .height(IntrinsicSize.Min)
-                .defaultMinSize(minHeight = 50.dp)
                 .background(WhiteColor),
             elevation = 4.dp,
             shape = RoundedCornerShape(10.dp)
@@ -60,12 +63,12 @@ fun LabelView(
 
                 if (icon != null) {
                     Icon(
-                        painter = painterResource(id = icon),
-                        tint = iconTint,
-                        contentDescription = null,
                         modifier = Modifier
                             .padding(start = 16.dp, end = 10.dp)
-                            .size(height = iconHeight, width = iconWidth)
+                            .size(height = iconHeight, width = iconWidth),
+                        painter = painterResource(id = icon),
+                        tint = iconTint,
+                        contentDescription = null
                     )
 
                     Divider(
@@ -77,6 +80,7 @@ fun LabelView(
                     )
                 }
 
+                // TODO wrap content height? Works when ".height(IntrinsicSize.Min)" deleted, but divider gets zero height
                 Text(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -86,7 +90,7 @@ fun LabelView(
                             top = 16.dp,
                             bottom = 16.dp
                         ),
-                    text = text,
+                    text = text
                 )
             }
         }
