@@ -9,6 +9,7 @@ import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -41,6 +42,10 @@ fun ClientsScreen(
             navController.openWith(screen = ScreenRoutes.ClientInfo, param = it)
         }
     )
+
+    LaunchedEffect(key1 = Unit, block = {
+        viewModel.sendEvent(ClientsScreenEvent.FetchEvent)
+    })
 }
 
 @Composable

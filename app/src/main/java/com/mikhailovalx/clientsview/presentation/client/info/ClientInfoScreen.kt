@@ -9,6 +9,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -31,13 +32,16 @@ fun ClientInfoScreen(
     clientId: Long,
     navController: NavController
 ) {
-    viewModel.sendEvent(ClientInfoEvent.FetchEvent(clientId))
     val state by viewModel.state.collectAsState()
 
     ClientInfoScreenContent(
         onBackPressed = { navController.popBackStack() },
         client = state.client
     )
+
+    LaunchedEffect(key1 = Unit, block = {
+        viewModel.sendEvent(ClientInfoEvent.FetchEvent(clientId))
+    })
 }
 
 

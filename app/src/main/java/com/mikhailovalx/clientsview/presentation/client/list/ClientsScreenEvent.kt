@@ -7,7 +7,7 @@ import javax.annotation.concurrent.Immutable
 
 @Immutable
 sealed class ClientsScreenEvent : IEvent {
-    data class FetchEvent(val clients: List<ClientUi>) : ClientsScreenEvent()
+    object FetchEvent : ClientsScreenEvent()
 }
 
 @Immutable
