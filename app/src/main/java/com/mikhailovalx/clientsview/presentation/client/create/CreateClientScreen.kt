@@ -14,6 +14,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -67,6 +68,10 @@ fun CreateClientScreen(
         onCommentChanged = { viewModel.sendEvent(CreateClientEvent.CommentChangedEvent(it)) },
         onSkipsChanged = { viewModel.sendEvent(CreateClientEvent.SkipsChangedEvent(it)) }
     )
+
+    LaunchedEffect(key1 = Unit, block = {
+        viewModel.sendEvent(CreateClientEvent.FetchEvent(clientId = clientId))
+    })
 }
 
 @ExperimentalAnimationApi

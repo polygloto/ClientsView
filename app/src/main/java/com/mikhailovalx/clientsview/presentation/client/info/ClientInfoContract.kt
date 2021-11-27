@@ -8,6 +8,7 @@ import javax.annotation.concurrent.Immutable
 @Immutable
 sealed class ClientInfoEvent : IEvent {
     data class FetchEvent(val clientId: Long) : ClientInfoEvent()
+    object DeleteClientEvent : ClientInfoEvent()
 }
 
 @Immutable
@@ -20,7 +21,7 @@ data class ClientInfoState(
                 id = null,
                 name = "",
                 phone = "",
-                birthday = Long.MIN_VALUE,
+                birthday = 0L,
                 comment = "",
                 skips = 0,
                 isImportant = false

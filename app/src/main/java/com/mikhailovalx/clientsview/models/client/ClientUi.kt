@@ -13,7 +13,7 @@ data class ClientUi(
     val isImportant: Boolean
 ) : IConvertibleTo<ClientEntity> {
 
-    val stringBirthday = if (birthday != Long.MIN_VALUE) birthday.toStringDate() else ""
+    val stringBirthday = birthday.toStringDate()
 
     override fun convertTo(): ClientEntity {
         return ClientEntity(

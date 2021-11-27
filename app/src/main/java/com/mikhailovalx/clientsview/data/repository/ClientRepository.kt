@@ -17,13 +17,28 @@ class ClientRepository @Inject constructor(
         localDataSource.saveClient(client)
     }
 
-    override fun getClientById(clientId: Long): Flow<ClientEntity> {
-        return localDataSource.getClientById(clientId)
+    override fun getClientFlow(clientId: Long): Flow<ClientEntity> {
+        return localDataSource.getClientFlow(clientId)
+    }
+
+    override suspend fun getClient(clientId: Long): ClientEntity {
+        return localDataSource.getClient(clientId = clientId)
+    }
+
+    override suspend fun deleteClient(client: ClientEntity) {
+        localDataSource.deleteClient(client = client)
+    }
+
+    override suspend fun updateClient(client: ClientEntity) {
+        localDataSource.updateClient(client = client)
     }
 }
 
 interface IClientRepository {
     fun getClients(): Flow<List<ClientEntity>>
     suspend fun saveClient(client: ClientEntity)
-    fun getClientById(clientId: Long): Flow<ClientEntity>
+    suspend fun getClient(clientId: Long): ClientEntity
+    fun getClientFlow(clientId: Long): Flow<ClientEntity>
+    suspend fun deleteClient(client: ClientEntity)
+    suspend fun updateClient(client: ClientEntity)
 }

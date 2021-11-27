@@ -1,6 +1,7 @@
 package com.mikhailovalx.clientsview.presentation.client.create
 
 import com.mikhailovalx.clientsview.core.base.BaseViewModel
+import com.mikhailovalx.clientsview.domain.use_case.IGetClientUseCase
 import com.mikhailovalx.clientsview.domain.use_case.ISaveClientUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -8,7 +9,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CreateClientViewModel @Inject constructor(
-    private val saveClientUseCase: ISaveClientUseCase
+    private val saveClientUseCase: ISaveClientUseCase,
+    private val getClientUseCase: IGetClientUseCase
 ) : BaseViewModel<CreateClientState, CreateClientEvent>() {
     override val initialState: CreateClientState = CreateClientState.initial
 
@@ -38,11 +40,15 @@ class CreateClientViewModel @Inject constructor(
         }
     }
 
-    private fun handleFetchEvent(clientId: Long?, oldState: CreateClientState): CreateClientState {
+    private suspend fun handleFetchEvent(
+        clientId: Long?,
+        oldState: CreateClientState
+    ): CreateClientState {
         return if (clientId == null) {
             oldState
         } else {
-            oldState
+            val client = getClientUseCase(params = clientId)
+            CreateClientState(client = client)
         }
     }
 

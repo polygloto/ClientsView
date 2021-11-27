@@ -7,14 +7,14 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class GetClientByIdUseCase @Inject constructor(
+class GetClientFlowUseCase @Inject constructor(
     private val clientRepository: IClientRepository
-) : IGetClientByIdUseCase {
+) : IGetClientFlowUseCase {
     override fun invoke(params: Long): Flow<ClientUi> {
-        return clientRepository.getClientById(clientId = params).map {
+        return clientRepository.getClientFlow(clientId = params).map {
             it.convertTo()
         }
     }
 }
 
-interface IGetClientByIdUseCase : IUseCase.FlowInOut<Long, ClientUi>
+interface IGetClientFlowUseCase : IUseCase.FlowInOut<Long, ClientUi>

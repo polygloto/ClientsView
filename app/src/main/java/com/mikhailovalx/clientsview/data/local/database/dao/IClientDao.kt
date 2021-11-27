@@ -10,10 +10,16 @@ interface IClientDao {
     fun getClients(): Flow<List<ClientEntity>>
 
     @Query("SELECT * FROM client_table WHERE ID = :clientId")
-    fun getClientById(clientId: Long): Flow<ClientEntity>
+    fun getClientFlow(clientId: Long): Flow<ClientEntity>
+
+    @Query("SELECT * FROM client_table WHERE ID = :clientId")
+    fun getClient(clientId: Long): ClientEntity
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(client: ClientEntity)
+
+    @Update
+    suspend fun update(client: ClientEntity)
 
     @Delete
     suspend fun delete(client: ClientEntity)

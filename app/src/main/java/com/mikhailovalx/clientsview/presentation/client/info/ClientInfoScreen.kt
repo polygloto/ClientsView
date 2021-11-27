@@ -40,6 +40,10 @@ fun ClientInfoScreen(
     ClientInfoScreenContent(
         onBackPressed = { navController.popBackStack() },
         onEditButtonClicked = { navController.openWith(ScreenRoutes.CreateEditClient, clientId) },
+        onDeleteButtonClicked = {
+            viewModel.sendEvent(ClientInfoEvent.DeleteClientEvent)
+            navController.popBackStack()
+        },
         client = state.client
     )
 
@@ -53,7 +57,8 @@ fun ClientInfoScreen(
 fun ClientInfoScreenContent(
     client: ClientUi,
     onBackPressed: () -> Unit,
-    onEditButtonClicked: () -> Unit
+    onEditButtonClicked: () -> Unit,
+    onDeleteButtonClicked: () -> Unit
 ) {
 
     val scrollState = rememberScrollState()
@@ -64,7 +69,7 @@ fun ClientInfoScreenContent(
                 title = stringResource(id = R.string.client_info_title),
                 onBackPressed = onBackPressed,
                 actions = {
-                    ActionButtonView(onClick = { }, iconId = R.drawable.ic_delete)
+                    ActionButtonView(onClick = onDeleteButtonClicked, iconId = R.drawable.ic_delete)
                     ActionButtonView(onClick = onEditButtonClicked, iconId = R.drawable.ic_edit)
                 }
             )
@@ -91,6 +96,7 @@ fun ClientInfoScreenContent(
                     iconHeight = 20.dp,
                     backCircleSize = 90.dp,
                     frontCircleSize = 64.dp,
+                    isImportant = client.isImportant,
                     indicatorOffColor = IndicatorColor
                 )
 
@@ -110,16 +116,16 @@ fun ClientInfoScreenContent(
             )
 
             LabelView(
-                icon = R.drawable.ic_calendar_check,
-                text = client.birthday.toStringDate(),
-                title = stringResource(id = R.string.birthday),
+                icon = R.drawable.ic_phone,
+                text = client.phone,
+                title = stringResource(id = R.string.phone),
                 modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp)
             )
 
             LabelView(
-                icon = R.drawable.ic_phone,
-                text = client.phone,
-                title = stringResource(id = R.string.phone),
+                icon = R.drawable.ic_calendar_check,
+                text = client.birthday.toStringDate(),
+                title = stringResource(id = R.string.birthday),
                 modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp)
             )
 
@@ -130,7 +136,7 @@ fun ClientInfoScreenContent(
             ) {
                 NumberView(
                     title = stringResource(id = R.string.count_of_visits),
-                    number = 10 // TODO
+                    number = 0 // TODO кол-во посещений должно браться из таблицы с событиями
                 )
 
                 NumberView(
@@ -160,6 +166,7 @@ fun ClientInfoScreen_Preview() {
     ClientInfoScreenContent(
         onBackPressed = { },
         onEditButtonClicked = { },
+        onDeleteButtonClicked = { },
         client = PresentationMocks.client
     )
 }

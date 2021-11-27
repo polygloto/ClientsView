@@ -5,16 +5,12 @@ import com.mikhailovalx.clientsview.data.repository.IClientRepository
 import com.mikhailovalx.clientsview.models.client.ClientUi
 import javax.inject.Inject
 
-class SaveClientUseCase @Inject constructor(
+class DeleteClientUseCase @Inject constructor(
     private val clientRepository: IClientRepository
-) : ISaveClientUseCase {
+) : IDeleteClientUseCase {
     override suspend fun invoke(params: ClientUi) {
-        if (params.id == null) {
-            clientRepository.saveClient(client = params.convertTo())
-        } else {
-            clientRepository.updateClient(client = params.convertTo())
-        }
+        clientRepository.deleteClient(client = params.convertTo())
     }
 }
 
-interface ISaveClientUseCase : IUseCase.In<ClientUi>
+interface IDeleteClientUseCase : IUseCase.In<ClientUi>

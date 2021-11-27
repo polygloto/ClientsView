@@ -27,7 +27,7 @@ data class CreateClientState(
                 id = null,
                 name = "",
                 phone = "",
-                birthday = Long.MIN_VALUE,
+                birthday = 0L,
                 comment = "",
                 skips = 0,
                 isImportant = false
