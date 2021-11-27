@@ -17,10 +17,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.mikhailovalx.clientsview.R
+import com.mikhailovalx.clientsview.core.extensions.openWith
 import com.mikhailovalx.clientsview.core.extensions.toStringDate
 import com.mikhailovalx.clientsview.models.client.ClientUi
+import com.mikhailovalx.clientsview.navigation.ScreenRoutes
 import com.mikhailovalx.clientsview.presentation.PresentationMocks
 import com.mikhailovalx.clientsview.presentation.common.*
 import com.mikhailovalx.clientsview.theme.IndicatorColor
@@ -28,7 +31,7 @@ import com.mikhailovalx.clientsview.theme.PrimaryColor
 
 @Composable
 fun ClientInfoScreen(
-    viewModel: ClientInfoViewModel,
+    viewModel: ClientInfoViewModel = hiltViewModel(),
     clientId: Long,
     navController: NavController
 ) {
@@ -36,6 +39,7 @@ fun ClientInfoScreen(
 
     ClientInfoScreenContent(
         onBackPressed = { navController.popBackStack() },
+        onEditButtonClicked = { navController.openWith(ScreenRoutes.CreateEditClient, clientId) },
         client = state.client
     )
 
@@ -48,7 +52,8 @@ fun ClientInfoScreen(
 @Composable
 fun ClientInfoScreenContent(
     client: ClientUi,
-    onBackPressed: () -> Unit
+    onBackPressed: () -> Unit,
+    onEditButtonClicked: () -> Unit
 ) {
 
     val scrollState = rememberScrollState()
@@ -60,7 +65,7 @@ fun ClientInfoScreenContent(
                 onBackPressed = onBackPressed,
                 actions = {
                     ActionButtonView(onClick = { }, iconId = R.drawable.ic_delete)
-                    ActionButtonView(onClick = { }, iconId = R.drawable.ic_edit)
+                    ActionButtonView(onClick = onEditButtonClicked, iconId = R.drawable.ic_edit)
                 }
             )
         }
@@ -154,6 +159,7 @@ fun ClientInfoScreenContent(
 fun ClientInfoScreen_Preview() {
     ClientInfoScreenContent(
         onBackPressed = { },
+        onEditButtonClicked = { },
         client = PresentationMocks.client
     )
 }

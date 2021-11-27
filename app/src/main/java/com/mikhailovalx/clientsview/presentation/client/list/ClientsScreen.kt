@@ -18,6 +18,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.mikhailovalx.clientsview.R
 import com.mikhailovalx.clientsview.core.extensions.openWith
@@ -32,7 +33,7 @@ import com.mikhailovalx.clientsview.theme.PrimaryTextColor
 @Composable
 fun ClientsScreen(
     navController: NavController,
-    viewModel: ClientsViewModel
+    viewModel: ClientsViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
 

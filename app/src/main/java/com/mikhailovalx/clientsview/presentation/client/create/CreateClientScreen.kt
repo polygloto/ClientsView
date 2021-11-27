@@ -25,6 +25,7 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.mikhailovalx.clientsview.R
 import com.mikhailovalx.clientsview.core.extensions.showDatePicker
@@ -39,7 +40,7 @@ import com.mikhailovalx.clientsview.theme.WhiteColor
 @ExperimentalComposeUiApi
 @Composable
 fun CreateClientScreen(
-    viewModel: CreateClientViewModel,
+    viewModel: CreateClientViewModel = hiltViewModel(),
     clientId: Long? = null,
     navController: NavController
 ) {

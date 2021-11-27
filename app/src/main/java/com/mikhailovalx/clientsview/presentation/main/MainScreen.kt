@@ -35,11 +35,8 @@ fun MainScreen() {
                     startDestination = ScreenRoutes.Main.route,
                     modifier = Modifier.weight(1F)
                 ) {
-                    composable(
-                        ScreenRoutes.Main.route
-                    ) {
-                        NavigationScreen(navController)
-                    }
+                    /** Screen that includes bottom navigation menu */
+                    composable(ScreenRoutes.Main.route) { NavigationScreen(navController) }
 
                     composable(
                         route = navParams(ScreenRoutes.ClientInfo, CLIENT_ID_ARG),
@@ -48,18 +45,23 @@ fun MainScreen() {
                         backStackEntry.arguments?.getLong(CLIENT_ID_ARG)?.let { clientId ->
                             ClientInfoScreen(
                                 clientId = clientId,
-                                navController = navController,
-                                viewModel = hiltViewModel()
+                                navController = navController
                             )
                         }
                     }
 
                     composable(
-                        ScreenRoutes.CreateEditClient.route
-                    ) {
+                        route = navParams(ScreenRoutes.CreateEditClient, CLIENT_ID_ARG),
+                        arguments = listOf(navArgument(CLIENT_ID_ARG) {
+                            type = NavType.StringType
+                            nullable = true
+                            defaultValue = null
+                        }),
+                    ) { backStackEntry ->
+                        val clientId = backStackEntry.arguments?.getString(CLIENT_ID_ARG)
                         CreateClientScreen(
                             navController = navController,
-                            viewModel = hiltViewModel()
+                            clientId = clientId?.toLongOrNull()
                         )
                     }
                 }

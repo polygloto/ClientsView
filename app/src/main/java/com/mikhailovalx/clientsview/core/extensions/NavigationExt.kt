@@ -7,7 +7,7 @@ fun NavController.open(screen: IScreen) {
     this.navigate(screen.route)
 }
 
-fun NavController.openWith(screen: IScreen, param: Any) {
+fun NavController.openWith(screen: IScreen, param: Any?) {
     this.navigate("${screen.route}/$param")
 }
 
