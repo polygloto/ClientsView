@@ -5,15 +5,13 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.material.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -26,19 +24,32 @@ import com.mikhailovalx.clientsview.models.client.ClientUi
 import com.mikhailovalx.clientsview.navigation.ScreenRoutes
 import com.mikhailovalx.clientsview.presentation.PresentationMocks
 import com.mikhailovalx.clientsview.presentation.common.IndicatorView
+import com.mikhailovalx.clientsview.presentation.common.SearchView
 import com.mikhailovalx.clientsview.theme.LabelIconsColor
 import com.mikhailovalx.clientsview.theme.PrimaryColor
 import com.mikhailovalx.clientsview.theme.PrimaryTextColor
+import com.mikhailovalx.clientsview.theme.WhiteColor
 
+@ExperimentalComposeUiApi
 @Composable
 fun ClientsScreen(
     navController: NavController,
     viewModel: ClientsViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
+    var searchQuery by remember { mutableStateOf("") }
+    val keyboardController = LocalSoftwareKeyboardController.current
+    val focusManager = LocalFocusManager.current
 
     ClientsScreenContent(
         clients = state.clients,
+        searchQuery = searchQuery,
+        onSearchQueryChanged = { searchQuery = it },
+        onCloseButtonClicked = {
+            searchQuery = ""
+            keyboardController?.hide()
+            focusManager.clearFocus()
+        },
         onClientClick = {
             navController.openWith(screen = ScreenRoutes.ClientInfo, param = it)
         }
@@ -49,20 +60,41 @@ fun ClientsScreen(
     })
 }
 
+@ExperimentalComposeUiApi
 @Composable
 fun ClientsScreenContent(
     clients: List<ClientUi>,
     onClientClick: (Long) -> Unit,
+    searchQuery: String,
+    onSearchQueryChanged: (String) -> Unit,
+    onCloseButtonClicked: () -> Unit
 ) {
-    LazyColumn {
-        items(clients) { client ->
-            ClientCard(
-                client = client,
-                onClientClick = onClientClick
-            )
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                backgroundColor = WhiteColor
+            ) {
+                SearchView(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 8.dp),
+                    query = searchQuery,
+                    onQueryChanged = onSearchQueryChanged,
+                    onCloseButtonClicked = onCloseButtonClicked
+                )
+            }
         }
-        item {
-            Spacer(modifier = Modifier.height(60.dp))
+    ) {
+        LazyColumn {
+            items(clients) { client ->
+                ClientCard(
+                    client = client,
+                    onClientClick = onClientClick
+                )
+            }
+            item {
+                Spacer(modifier = Modifier.height(60.dp))
+            }
         }
     }
 }
@@ -127,11 +159,15 @@ fun ClientCardText(name: String, phone: String) {
     }
 }
 
+@ExperimentalComposeUiApi
 @Preview
 @Composable
 fun ClientsScreen_Preview() {
     ClientsScreenContent(
         clients = listOf(PresentationMocks.client),
-        onClientClick = { }
+        onClientClick = { },
+        searchQuery = "",
+        onSearchQueryChanged = { },
+        onCloseButtonClicked = { }
     )
 }

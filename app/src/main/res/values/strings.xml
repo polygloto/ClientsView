@@ -9,4 +9,6 @@
     <string name="count_of_visits">Посещения</string>
     <string name="count_of_skips">Прогулы</string>
     <string name="client_info_title">Клиент</string>
+    <string name="clients_title">Клиенты</string>
+    <string name="search_view_label">Поисковая строка</string>
 </resources>
