@@ -1,7 +1,6 @@
 package com.mikhailovalx.clientsview.di
 
 import com.mikhailovalx.clientsview.domain.use_case.*
-import com.mikhailovalx.clientsview.domain.use_case.GetClientsUseCase
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -31,4 +30,8 @@ interface UseCaseModule {
     @Binds
     @ViewModelScoped
     fun bindDeleteClientUseCase(getClientUseCase: DeleteClientUseCase): IDeleteClientUseCase
+
+    @Binds
+    @ViewModelScoped
+    fun bindFindClientUseCase(getClientUseCase: FindClientUseCase): IFindClientUseCase
 }

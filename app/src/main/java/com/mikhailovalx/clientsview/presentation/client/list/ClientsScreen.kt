@@ -44,7 +44,10 @@ fun ClientsScreen(
     ClientsScreenContent(
         clients = state.clients,
         searchQuery = searchQuery,
-        onSearchQueryChanged = { searchQuery = it },
+        onSearchQueryChanged = {
+            searchQuery = it
+            viewModel.sendEvent(ClientsScreenEvent.FindClientEvent(searchQuery = it))
+        },
         onCloseButtonClicked = {
             searchQuery = ""
             keyboardController?.hide()

@@ -15,6 +15,9 @@ interface IClientDao {
     @Query("SELECT * FROM client_table WHERE ID = :clientId")
     fun getClient(clientId: Long): ClientEntity
 
+    @Query("SELECT * FROM client_table WHERE NAME LIKE '%' || :searchQuery || '%' OR PHONE LIKE '%' || :searchQuery || '%' ORDER BY NAME")
+    fun findClient(searchQuery: String): List<ClientEntity>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(client: ClientEntity)
 

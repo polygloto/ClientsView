@@ -32,6 +32,10 @@ class ClientLocalDataSource @Inject constructor(
     override suspend fun updateClient(client: ClientEntity) {
         clientDao.update(client = client)
     }
+
+    override suspend fun findClient(searchQuery: String): List<ClientEntity> {
+        return clientDao.findClient(searchQuery = searchQuery)
+    }
 }
 
 interface IClientLocalDataSource {
@@ -41,4 +45,5 @@ interface IClientLocalDataSource {
     fun getClientFlow(clientId: Long): Flow<ClientEntity>
     suspend fun deleteClient(client: ClientEntity)
     suspend fun updateClient(client: ClientEntity)
+    suspend fun findClient(searchQuery: String): List<ClientEntity>
 }
