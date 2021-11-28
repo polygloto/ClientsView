@@ -1,11 +1,12 @@
-import java.util.*
-
 plugins {
     id("kotlin-kapt")
     id("com.android.application")
     id("kotlin-android")
     id("dagger.hilt.android.plugin")
 }
+
+val composeVersion = "1.1.0-beta02"
+val roomVersion = "2.3.0"
 
 android {
     compileSdk = 31
@@ -56,9 +57,6 @@ android {
         }
     }
 }
-
-val composeVersion = "1.1.0-beta02"
-val roomVersion = "2.3.0"
 
 dependencies {
 

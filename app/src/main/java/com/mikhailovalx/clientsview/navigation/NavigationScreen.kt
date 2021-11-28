@@ -7,6 +7,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -20,6 +21,7 @@ import com.mikhailovalx.clientsview.presentation.finance.FinanceScreen
 import com.mikhailovalx.clientsview.theme.PrimaryColor
 import com.mikhailovalx.clientsview.theme.WhiteColor
 
+@ExperimentalComposeUiApi
 @Composable
 fun NavigationScreen(
         navHostController: NavHostController
