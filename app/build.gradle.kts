@@ -85,11 +85,6 @@ dependencies {
     kapt("androidx.room:room-compiler:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")
 
-    // Calendar
-    implementation("com.github.sigmadeltasoftware:CalPose:1.1.0")
-    implementation("com.github.fornewid:material-motion-compose:0.5.1")
-
     // Pager
-    implementation("com.google.accompanist:accompanist-pager:0.21.0-beta")
-    implementation("com.google.accompanist:accompanist-pager-indicators:0.21.0-beta")
+    implementation("com.google.accompanist:accompanist-pager:0.17.0")
 }

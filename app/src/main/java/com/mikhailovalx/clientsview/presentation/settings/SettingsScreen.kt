@@ -1,4 +1,4 @@
-package com.mikhailovalx.clientsview
+package com.mikhailovalx.clientsview.presentation.settings
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable

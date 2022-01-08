@@ -11,4 +11,14 @@
     <string name="client_info_title">Клиент</string>
     <string name="clients_title">Клиенты</string>
     <string name="search_view_label">Поисковая строка</string>
+
+    <string-array name="days_of_week">
+        <item>Пн</item>
+        <item>Вт</item>
+        <item>Ср</item>
+        <item>Чт</item>
+        <item>Пт</item>
+        <item>Сб</item>
+        <item>Вс</item>
+    </string-array>
 </resources>

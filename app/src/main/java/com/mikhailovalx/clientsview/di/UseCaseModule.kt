@@ -34,4 +34,8 @@ interface UseCaseModule {
     @Binds
     @ViewModelScoped
     fun bindFindClientUseCase(getClientUseCase: FindClientUseCase): IFindClientUseCase
+
+    @Binds
+    @ViewModelScoped
+    fun bindMonthCalendarUseCase(getMonthCalendarUseCase: GetMonthCalendarUseCase): IGetMonthCalendarUseCase
 }
