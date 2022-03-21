@@ -1,9 +1,6 @@
 package com.mikhailovalx.clientsview.navigation
 
-import androidx.compose.material.FabPosition
-import androidx.compose.material.FloatingActionButton
-import androidx.compose.material.Icon
-import androidx.compose.material.Scaffold
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.runtime.Composable
@@ -21,6 +18,7 @@ import com.mikhailovalx.clientsview.presentation.finance.FinanceScreen
 import com.mikhailovalx.clientsview.theme.PrimaryColor
 import com.mikhailovalx.clientsview.theme.WhiteColor
 
+@ExperimentalMaterialApi
 @ExperimentalComposeUiApi
 @Composable
 fun NavigationScreen(

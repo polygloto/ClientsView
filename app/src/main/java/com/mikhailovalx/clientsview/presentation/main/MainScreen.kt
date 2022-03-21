@@ -3,6 +3,7 @@ package com.mikhailovalx.clientsview.presentation.main
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -22,6 +23,7 @@ import com.mikhailovalx.clientsview.presentation.client.create.CreateClientScree
 import com.mikhailovalx.clientsview.presentation.client.info.ClientInfoScreen
 import com.mikhailovalx.clientsview.theme.MainTheme
 
+@ExperimentalMaterialApi
 @ExperimentalAnimationApi
 @ExperimentalComposeUiApi
 @Composable
@@ -70,6 +72,7 @@ fun MainScreen() {
     }
 }
 
+@ExperimentalMaterialApi
 @ExperimentalAnimationApi
 @ExperimentalComposeUiApi
 @Preview(showBackground = true)

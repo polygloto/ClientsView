@@ -3,6 +3,7 @@ package com.mikhailovalx.clientsview.presentation.calendar
 import com.mikhailovalx.clientsview.core.IEvent
 import com.mikhailovalx.clientsview.core.IState
 import com.mikhailovalx.clientsview.models.calendar.CalendarUi
+import com.mikhailovalx.clientsview.models.calendar.Day
 import java.util.*
 import javax.annotation.concurrent.Immutable
 
@@ -11,6 +12,7 @@ sealed class CalendarScreenEvent : IEvent {
     object FetchEvent : CalendarScreenEvent()
     object NextMonthEvent : CalendarScreenEvent()
     object PreviousMonthEvent : CalendarScreenEvent()
+    data class OnDayClicked(val day: Day) : CalendarScreenEvent()
 }
 
 @Immutable
